@@ -1,0 +1,46 @@
+/* 1. base
+-------------------------------*/
+/*rest*/
+ul, ol, li{margin: 0;padding: 0;}
+ol, ul {list-style: none;}
+/*custom*/
+.mt10{margin-top:10px;}
+.mt15{margin-top:15px;}
+.mt20{margin-top:20px;}
+.mt30{margin-top:30px;}
+
+.mr10{margin-right:10px;}
+
+.mb10{margin-bottom:10px;}
+.mb20{margin-bottom:20px;}
+.mb30{margin-bottom:30px;}
+
+.ml10{margin-left:10px;}
+
+/*header*/
+.m_header{position:fixed;top:0;right:0;left:0;height:60px;background-color:#2B42A5;/*background-color:#fff;*/}
+.m_header h3{color:#fff;}
+.m_headerLeft{display:block;float:left;height:60px;padding:10px 20px;background-color:#202020;width:240px;color:#fff;line-height:40px;}
+.m_headerLeft:hover{color:#fff;text-decoration:none;}
+.m_userImg{width:40px;height:40px;border-radius:50%;}
+.m_headerRight{float:left;padding-left:15px;}
+
+.m_navA,.m_nav_a{transition:background-color .2s;-webkit-transition:background-color .2s;-moz-transition:background-color .2s;-ms-transition:background-color .2s;-o-transition:background-color .2s;}
+.m_nav{position:fixed;top:60px;bottom:0;left:0;overflow-y:auto;width:240px;background-color:#202020;border-top:2px solid #444;}
+.m_navUl{color:#fff;line-height:46px;}
+.m_navA,.m_nav_a{display:block;height:40px;line-height:40px;color:#aaa;padding-left:20px;border-bottom:1px solid #333;cursor: pointer;}
+.m_navA{padding-right:10px;background:url("../img/icon_hide.png") 220px center no-repeat #121212;}
+.m_navA.active{background-image:url("../img/icon_show.png");background-color:#000;}
+.m_navA:hover{text-decoration:none;color:#aaa;}
+.m_nav_a{height:46px;line-height:46px;color:#fff;padding-left:46px;}
+.m_nav_a:hover{background-color:#121212;text-decoration:none;color:#fff;}
+.m_nav_a.active{background-color:#4061F2;}
+
+.python{position:fixed;top:60px;left:240px;right:0;height:34px;border-bottom:1px solid #eee;line-height:34px;padding-left:20px;background-color:#fff;}
+.m_container{position:fixed;top:94px;right:0;bottom:0;left:240px;overflow-y:auto;}
+.dpc_btnB{padding:15px 0;}
+.dpc_box1{border-top:1px solid #8091d9;padding:20px;background-color:#fff;}
+.dpc_box2{border-top:1px solid #d5daf2;padding:20px;background-color:#fff;}
+/* 1. login.html
+-------------------------------*/
+.login_box{width:360px;margin:60px auto;}
