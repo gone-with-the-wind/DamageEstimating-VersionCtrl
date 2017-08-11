@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="utf-8">
-    
+    <meta charset="utf-8"> 
     <title>登录</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
-    <link rel="stylesheet" href="css/main.css" >
-
+    <link rel="stylesheet" href="../css/bootstrap.min.css" >
+    <link rel="stylesheet" href="../css/main.css" >
     <style type="text/css">
         *{
             padding: 0;
@@ -17,7 +15,6 @@
             height:100%;
             position: relative;
         }
-
         .wrapper{
             position: absolute;
             top: 0;
@@ -32,9 +29,7 @@
         .error{
             color: red;
         }
-
     </style>
-
 </head>
 <body ng-app="app" ng-controller="myCtrl">
     <div class="container">
@@ -76,14 +71,16 @@
         </div>
     </div>
 
-<script src="js/jquery.min.js"></script>
-<script src="js/encrypt.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/angular.min.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/encrypt.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/angular.min.js"></script>
+<script src="../js/service.js"></script>
+
 
 <script> 
-    var app = angular.module('app',[]);
-    app.controller("myCtrl",["$scope","$http","$window",function($scope,$http,$window){
+    var app = angular.module('app',['MyService']);
+    app.controller("myCtrl",["$scope","$http","$window","urlService",function($scope,$http,$window,urlService){
         $scope.userdata={};
 
         $scope.submitForm=function(){
@@ -101,12 +98,23 @@
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/DamageEstimating-1.0-SNAPSHOT/person/login',
+
+                url: urlService.getCommonUrl()+'/person/login',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 data: 'login_id='+$scope.userdata.username+'&pwd='+$scope.userdata.password
-                }).then(function(response) {
-                console.log(res)
-                }, function(response) {
+                }).then(function(data) {
+                    
+                    
+                    // var obj=(new Function("","return "+data))(); 
+                    
+                    
+                    if(Number(data.data.code)===0){
+                        console.log(data.data.msg);
+                    }else{
+                       console.log(data.data.msg); 
+                    }
+                
+                }, function(error) {
                 // on error
                 });
 
@@ -132,7 +140,7 @@
     app.directive("validate",function(){
         return  {
             restrict: 'EA',
-            templateUrl: "temp/login_validate.html",
+            templateUrl: "../temp/login_validate.html",
             scope:{
                 isdisabled:"=",   
             },
