@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>任务查询</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+</head>
+<body>
+<div class="m_header">
+    <a class="m_headerLeft" href="login.html">
+        <i class="glyphicon glyphicon-user"></i><span class="ml10">用户名</span>
+    </a>
+    <div class="m_headerRight">
+        <h3>新东方管理平台</h3>
+    </div>
+</div>
+<div class="m_nav">
+    <ul class="m_navUl">
+        <li>
+            <a class="m_navA active" href="dispatch.html"><i class="glyphicon glyphicon-log-out mr10"></i>调度</a>
+            <ul class="m_nav_ul">
+                <li><a class="m_nav_a" href="dispatch.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>未调度</a></li>
+                <li><a class="m_nav_a" href="dispatch_backCase.html"><i class="glyphicon glyphicon-remove mr10"></i>退回案件查询</a></li>
+                <li><a class="m_nav_a active" href="dispatch_caseSearch.html"><i class="glyphicon glyphicon-search mr10"></i>任务查询</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="m_navA" href="survey.html"><i class="glyphicon glyphicon-log-out mr10"></i>查勘</a>
+            <ul class="m_nav_ul hidden">
+                <li><a class="m_nav_a" href="survey.html"><i class="glyphicon glyphicon-map-marker mr10"></i>区域管理</a></li>
+                <li><a class="m_nav_a" href="survey_new.html"><i class="glyphicon glyphicon-log-in mr10"></i>新任务</a></li>
+                <li><a class="m_nav_a" href="survey_processing.html"><i class="glyphicon glyphicon-option-vertical mr10"></i>处理中</a></li>
+                <li><a class="m_nav_a" href="survey_back.html"><i class="glyphicon glyphicon-alert mr10"></i>退回</a></li>
+                <li><a class="m_nav_a" href="survey_inReview.html"><i class="glyphicon glyphicon-option-vertical mr10"></i>审核中</a></li>
+                <li><a class="m_nav_a" href="survey_inSecretary.html"><i class="glyphicon glyphicon-option-vertical mr10"></i>内勤处理中</a></li>
+                <li><a class="m_nav_a" href="survey_ok.html"><i class="glyphicon glyphicon-thumbs-up mr10"></i>已完成</a></li>
+                <li><a class="m_nav_a" href="survey_documentCollection.html"><i class="glyphicon glyphicon-resize-small mr10"></i>单证收集</a></li>
+                <li><a class="m_nav_a" href="survey_closure.html"><i class="glyphicon glyphicon-thumbs-up mr10"></i>已结案</a></li>
+                <li><a class="m_nav_a" href="survey_caseSearch.html"><i class="glyphicon glyphicon-search mr10"></i>任务查询</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="m_navA" href="audit.html"><i class="glyphicon glyphicon-log-out mr10"></i>审核</a>
+            <ul class="m_nav_ul hidden">
+                <li><a class="m_nav_a" href="audit.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>待审核</a></li>
+                <li><a class="m_nav_a" href="audit_ok.html"><i class="glyphicon glyphicon-thumbs-up mr10"></i>已审核</a></li>
+                <li><a class="m_nav_a" href="audit_secretaryBack.html"><i class="glyphicon glyphicon-alert mr10"></i>内勤退回</a></li>
+                <li><a class="m_nav_a" href="audit_backSurvey.html"><i class="glyphicon glyphicon-alert mr10"></i>退回查勘员</a></li>
+                <li><a class="m_nav_a" href="audit_timeout.html"><i class="glyphicon glyphicon-alert mr10"></i>超时案件</a></li>
+                <li><a class="m_nav_a" href="audit_timeStatistical.html"><i class="glyphicon glyphicon-dashboard mr10"></i>时效统计</a></li>
+                <li><a class="m_nav_a" href="audit_caseSearch.html"><i class="glyphicon glyphicon-search mr10"></i>任务查询</a></li>
+            </ul>
+        </li>
+        <li>
+            <a class="m_navA" href="secretary.html"><i class="glyphicon glyphicon-log-out mr10"></i>内勤</a>
+            <ul class="m_nav_ul hidden">
+                <li><a class="m_nav_a" href="secretary.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>待录入</a></li>
+                <li><a class="m_nav_a" href="secretary_ok.html"><i class="glyphicon glyphicon-thumbs-up mr10"></i>已录入</a></li>
+                <li><a class="m_nav_a" href="secretary_backSurvey.html"><i class="glyphicon glyphicon-alert mr10"></i>退回查勘员</a></li>
+                <li><a class="m_nav_a" href="secretary_waitClosure.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>待结案</a></li>
+                <li><a class="m_nav_a" href="secretary_caseSearch.html"><i class="glyphicon glyphicon-search mr10"></i>任务查询</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="python">调度&nbsp;&gt;&nbsp;<a href="dispatch_caseSearch.html">任务查询</a></div>
+<!--内容-->
+<div class="m_container">
+    <div class="container-fluid">
+        <!--新增等按钮-->
+        <div class="dpc_btnB">
+            <a class="btn btn-primary mr10" href="dpcCS_caseDetails.html">修改案件</a>
+        </div>
+        <!--筛选-->
+        <div class="dpc_box1">
+            <form class="form-horizontal">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input1" class="col-xs-5 control-label">委托机构</label>
+                            <div class="col-xs-7">
+                                <select class="form-control" id="input1">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input2" class="col-xs-5 control-label">报案号</label>
+                            <div class="col-xs-7">
+                                <input type="password" class="form-control" id="input2" placeholder="请输入报案号">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input3" class="col-xs-5 control-label">车牌号</label>
+                            <div class="col-xs-7">
+                                <input type="password" class="form-control" id="input3" placeholder="请输入车牌号">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input4" class="col-xs-5 control-label">查勘员区域</label>
+                            <div class="col-xs-7">
+                                <input type="password" class="form-control" id="input4" placeholder="请输入查勘员区域">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input6" class="col-xs-5 control-label">查勘员区域</label>
+                            <div class="col-xs-7">
+                                <select class="form-control" id="input6">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input7" class="col-xs-5 control-label">查勘员</label>
+                            <div class="col-xs-7">
+                                <input type="password" class="form-control" id="input7" placeholder="请输入查勘员">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input8" class="col-xs-5 control-label">状态</label>
+                            <div class="col-xs-7">
+                                <select class="form-control" id="input8">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input9" class="col-xs-5 control-label">报案时间</label>
+                            <div class="col-xs-7">
+                                <input type="password" class="form-control" id="input9" placeholder="请输入报案时间">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="pull-right">
+                            <a class="btn btn-primary mr10">刷新</a>
+                            <a class="btn btn-primary mr10">重置</a>
+                            <a class="btn btn-primary mr10">搜索</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--案件-->
+        <div class="dpc_box2">
+            <div class="ofXAo">
+                <table class="table table-striped minWidth960">
+                    <thead>
+                    <tr>
+                        <th>跟踪</th>
+                        <th>状态</th>
+                        <th>委托机构</th>
+                        <th>报案号</th>
+                        <th>事发区域</th>
+                        <th>车牌号</th>
+                        <th>被保险员</th>
+                        <th>查勘员</th>
+                        <th>查勘员电话</th>
+                        <th>调度派发时间</th>
+                        <th>查勘接受时间</th>
+                        <th>跟踪时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    <tr>
+                        <td>跟踪</td>
+                        <td>状态</td>
+                        <td>委托机构</td>
+                        <td>报案号</td>
+                        <td>事发区域</td>
+                        <td>车牌号</td>
+                        <td>被保险员</td>
+                        <td>查勘员</td>
+                        <td>查勘员电话</td>
+                        <td>调度派发时间</td>
+                        <td>查勘接受时间</td>
+                        <td>跟踪时间</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
