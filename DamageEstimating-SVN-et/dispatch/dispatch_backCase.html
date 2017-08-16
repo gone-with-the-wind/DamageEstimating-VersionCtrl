@@ -4,14 +4,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>调度管理</title>
+    <title>退回案件查询</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/main.css" rel="stylesheet">
 </head>
-<body ng-app="app" ng-controller="ctrl">
+<body>
 <div class="m_header">
     <a class="m_headerLeft" href="login.html">
-        <!--<img class="m_userImg" src="">-->
         <i class="glyphicon glyphicon-user"></i><span class="ml10">用户名</span>
     </a>
     <div class="m_headerRight">
@@ -23,8 +22,8 @@
         <li>
             <a class="m_navA active" href="dispatch.html"><i class="glyphicon glyphicon-log-out mr10"></i>调度</a>
             <ul class="m_nav_ul">
-                <li><a class="m_nav_a active" href="dispatch.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>未调度</a></li>
-                <li><a class="m_nav_a" href="dispatch_backCase.html"><i class="glyphicon glyphicon-remove mr10"></i>退回案件查询</a></li>
+                <li><a class="m_nav_a" href="dispatch.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>未调度</a></li>
+                <li><a class="m_nav_a active" href="dispatch_backCase.html"><i class="glyphicon glyphicon-remove mr10"></i>退回案件查询</a></li>
                 <li><a class="m_nav_a" href="dispatch_caseSearch.html"><i class="glyphicon glyphicon-search mr10"></i>任务查询</a></li>
             </ul>
         </li>
@@ -56,7 +55,6 @@
             </ul>
         </li>
         <li>
-
             <a class="m_navA" href="secretary.html"><i class="glyphicon glyphicon-log-out mr10"></i>内勤</a>
             <ul class="m_nav_ul hidden">
                 <li><a class="m_nav_a" href="secretary.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>待录入</a></li>
@@ -68,17 +66,13 @@
         </li>
     </ul>
 </div>
-<div class="python">调度&nbsp;&gt;&nbsp;<a href="dispatch.html">调度管理</a></div>
-
+<div class="python">调度&nbsp;&gt;&nbsp;<a href="dispatch_backCase.html">退回案件查询</a></div>
 <!--内容-->
 <div class="m_container">
     <div class="container-fluid">
         <!--新增等按钮-->
         <div class="dpc_btnB">
-            <a class="btn btn-primary mr10" href="dpc_addCase.html">新增</a>
-            <a class="btn btn-primary mr10" href="dpc_modifyCase.html">编辑</a>
-            <a class="btn btn-primary mr10">跟踪</a>
-            <a class="btn btn-primary mr10">导出</a>
+            <a class="btn btn-primary mr10" href="dpcBC_modifyCase.html">修改案件</a>
         </div>
         <!--筛选-->
         <div class="dpc_box1">
@@ -124,7 +118,7 @@
                     </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="form-group">
-                            <label for="input6" class="col-xs-5 control-label">状态</label>
+                            <label for="input6" class="col-xs-5 control-label">查勘员区域</label>
                             <div class="col-xs-7">
                                 <select class="form-control" id="input6">
                                     <option>1</option>
@@ -145,23 +139,27 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6">
-                            <div class="form-group">
-                                <label for="input8" class="col-xs-5 control-label">报案时间</label>
-                                <div class="col-xs-7">
-                                <p class="input-group">
-                                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                                    <span class="input-group-btn">
-                                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-                                    </span>
-                                </p>
-                                </div>
-                                
-                                    
+                        <div class="form-group">
+                            <label for="input8" class="col-xs-5 control-label">状态</label>
+                            <div class="col-xs-7">
+                                <select class="form-control" id="input8">
+                                    <option>1</option>
+                                    <option>2</option>
+                                    <option>3</option>
+                                    <option>4</option>
+                                    <option>5</option>
+                                </select>
                             </div>
-                            
-                    
                         </div>
-                    
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="form-group">
+                            <label for="input9" class="col-xs-5 control-label">报案时间</label>
+                            <div class="col-xs-7">
+                                <input type="password" class="form-control" id="input9" placeholder="请输入报案时间">
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-4 col-md-6">
                         <div class="pull-right">
                             <a class="btn btn-primary mr10">刷新</a>
@@ -395,107 +393,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="../js/angular.min.js"></script>
-<script type="text/javascript" src="../js/ui.min.js"></script>
-<script type="text/javascript">
-
-
-    angular.module('app',['ui.bootstrap']).controller('ctrl', function ($scope) {
-        $scope.today = function() {
-            $scope.dt = new Date();
-        };
-        $scope.today();
-
-        $scope.clear = function() {
-            $scope.dt = null;
-        };
-
-        $scope.inlineOptions = {   
-            minDate: new Date(),
-            
-        };
-
-        $scope.dateOptions = {
-            formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(),
-            startingDay: 0,
-            // customClass: getDayClass,
-            showWeeks: true
-        }
-
-  // Disable weekend selection
-  // function disabled(data) {
-  //    var date = data.date,
-  //    mode = data.mode;
-  //    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-  // }
-
-  // $scope.toggleMin = function() {
-  //   $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-  //   $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-  // };
-
-  // $scope.toggleMin();
-
-  $scope.open1 = function() {
-    $scope.popup1.opened = true;
-  };
-
-  // $scope.open2 = function() {
-  //   $scope.popup2.opened = true;
-  // };
-
-  // $scope.setDate = function(year, month, day) {
-  //   $scope.dt = new Date(year, month, day);
-  // };
-
-  // $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-  // $scope.format = $scope.formats[0];
-  // $scope.altInputFormats = ['M!/d!/yyyy'];
-
-  $scope.popup1 = {
-    opened: false
-  };
-
-  // $scope.popup2 = {
-  //   opened: false
-  // };
-
-  // var tomorrow = new Date();
-  // tomorrow.setDate(tomorrow.getDate() + 1);
-  // var afterTomorrow = new Date();
-  // afterTomorrow.setDate(tomorrow.getDate() + 1);
-  // $scope.events = [
-  // {
-  //   date: tomorrow,
-  //   status: 'full'
-  // },
-  // {
-  //   date: afterTomorrow,
-  //   status: 'partially'
-  // }
-  // ];
-
-//   function getDayClass(data) {
-//     var date = data.date,
-//     mode = data.mode;
-//     if (mode === 'day') {
-//         var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-//         for (var i = 0; i < $scope.events.length; i++) {
-//             var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-//             if (dayToCheck === currentDay) {
-//                 return $scope.events[i].status;
-//             }
-//         }
-//     }
-
-//     return '';
-//   }
- });
-    
-</script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>
