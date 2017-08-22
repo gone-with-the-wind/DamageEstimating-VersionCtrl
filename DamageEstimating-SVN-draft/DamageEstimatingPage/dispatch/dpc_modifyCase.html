@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>修改案件</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/datetimepicker.css">
     <link href="../css/main.css" rel="stylesheet">
 </head>
-<body>
+<body ng-app="app" ng-controller="ctrl">
 <div class="m_header">
     <a class="m_headerLeft" href="login.html">
         <i class="glyphicon glyphicon-user"></i><span class="ml10">用户名</span>
@@ -75,184 +76,254 @@
             <form class="form-horizontal">
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-offset-2 col-xs-10">
-                                <label class="radio-inline">
-                                    <input type="radio" name="1"> 协议委托
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="1"> 非协议委托
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="1"> 非车险
-                                </label>
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="1"> 协议委托
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="1"> 非协议委托
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="1"> 非车险
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input1" class="col-xs-5 control-label"><span class="text-red">*</span>委托机构</label>
-                            <div class="col-xs-7">
-                                <select class="form-control" id="input1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input1" class="col-xs-5 control-label"><span class="text-red">*</span>委托机构</label>
+                                <div class="col-xs-7">
+                                    <select class="form-control"
+                                        ng-model="addCase.delegate_org.selectId"
+                                        ng-options="value.delegateOrgId as value.delegateOrgName for value in addCase.delegate_org" required>
+                                        <option value="">--</option>
+                                    </select>
+                                    <!-- <select class="form-control" id="input1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select> -->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input2" class="col-xs-5 control-label">承保机构</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input2" placeholder="请输入承保机构">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input2" class="col-xs-5 control-label">承保机构</label>
+                                <div class="col-xs-7">
+
+
+                                    <select class="form-control"
+                                        ng-model="addCase.insurer.selectId"
+                                        ng-options="value.insurerId as value.insurerName for value in addCase.insurer" >
+                                        <option value="">--</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" id="input2" placeholder="请输入承保机构" ng-model="addCase.insurer.insurerName"> -->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input3" class="col-xs-5 control-label"><span class="text-red">*</span>报案号</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input3" placeholder="请输入报案号">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input3" class="col-xs-5 control-label"><span class="text-red">*</span>报案号</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" id="input3" placeholder="请输入报案号" required ng-model="addCase.reportNum">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input4" class="col-xs-5 control-label"><span class="text-red">*</span>车主</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input4" placeholder="请输入车主">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input4" class="col-xs-5 control-label"><span class="text-red">*</span>车主</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" id="input4" placeholder="请输入车主" required ng-model='addCase.owner'>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input5" class="col-xs-5 control-label"><span class="text-red">*</span>车牌号</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input5" placeholder="请输入车牌号">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input5" class="col-xs-5 control-label"><span class="text-red">*</span>车牌号</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" id="input5" placeholder="请输入车牌号" required ng-model="addCase.carNum">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input6" class="col-xs-5 control-label">车辆品牌</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input6" placeholder="请输入车辆品牌">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input6" class="col-xs-5 control-label">车辆品牌</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" id="input6" placeholder="请输入车辆品牌" ng-model="addCase.carBrand">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input7" class="col-xs-5 control-label"><span class="text-red">*</span>联系人</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input7" placeholder="请输入联系人">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input7" class="col-xs-5 control-label"><span class="text-red">*</span>联系人</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" id="input7" placeholder="请输入联系人" required ng-model="addCase.contact">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input8" class="col-xs-5 control-label"><span class="text-red">*</span>联系电话</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input8" placeholder="请输入联系电话">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group has-feedback">
+                                <label for="input8" class="col-xs-5 control-label"><span class="text-red">*</span>联系电话</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" id="input8" placeholder="请输入联系电话" required ng-model="addCase.contactPhone" ng-pattern="/^1\d{10}$/" name="contactPhone">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                              ng-show="myForm.contactPhone.$dirty && myForm.contactPhone.$valid"></span>
+
+                              <span class="glyphicon glyphicon-remove form-control-feedback"
+                              ng-show="myForm.contactPhone.$dirty && myForm.contactPhone.$invalid"></span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input9" class="col-xs-5 control-label">事故地点</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input9" placeholder="请输入事故地点">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input9" class="col-xs-5 control-label">事故地点</label>
+                                <div class="col-xs-7">
+                                    <input type="text" class="form-control" id="input9" placeholder="请输入事故地点" ng-model="addCase.accidentLocation">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input10" class="col-xs-5 control-label">事故类型</label>
-                            <div class="col-xs-7">
-                                <select class="form-control" id="input10">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input10" class="col-xs-5 control-label">事故类型</label>
+                                <div class="col-xs-7">
+                                    <!-- <select class="form-control" id="input10"> -->
+
+
+                                    <select class="form-control"
+                                        ng-model="addCase.scene_type.selectId"
+                                        ng-options="value.typeId as value.typeDesc for value in addCase.scene_type">
+                                        <option value="">--</option>
+                                    </select>
+                                       
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input11" class="col-xs-5 control-label">事故责任</label>
-                            <div class="col-xs-7">
-                                <select class="form-control" id="input11">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input11" class="col-xs-5 control-label">事故责任</label>
+                                <div class="col-xs-7">
+
+                                <select class="form-control"
+                                        ng-model="addCase.scene_resp.selectId"
+                                        ng-options="value.respId as value.respDesc for value in addCase.scene_resp">
+                                        <option value="">--</option>
+                                    </select>
+                                    <!-- <select class="form-control" id="input11">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select> -->
+
+
+                                    
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input12" class="col-xs-5 control-label">报案时间</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input12" placeholder="请输入报案时间">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input12" class="col-xs-5 control-label">报案时间</label>
+                                <div class="col-xs-7">
+                                   <div class="dropdown1">
+                                    <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target=".dropdown1" href="#">
+                                      <div class="input-group">
+                                        <input type="text" id="date1" name="date1" class="form-control" data-ng-model="addCase.reportTime1">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                  <datetimepicker   data-ng-model="addCase.reportTime1 " 
+                                  data-datetimepicker-config="{ dropdownSelector: '#dropdown1' ,minuteStep:1}"></datetimepicker>
+                              </ul>
+                        </div>
+
+                               <!--  <input size="16" type="text" ng-model="addCase.reportTime" readonly class="form_datetime form-control" id="input12">
+                                </div> -->
+
+
+                             <!--    <div class="input-group col-xs-7 date  form_datetime" data-date-format="dd MM yyyy - HH:ii p" >
+                                    
+                                        <input class="form-control" type="text" ng-model="addCase.reportTime" readonly  id="input12">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                    
+                                    </div> -->
+
+                                    
+                                </div>
+                            </div>
+                           </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input13" class="col-xs-5 control-label">出险时间</label>
+                                <div class="col-xs-7">
+                                  <div class="dropdown2">
+                                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target=".dropdown2" href="#">
+                                      <div class="input-group">
+                                        <input type="text" id="date2" name="date2" class="form-control" data-ng-model="addCase.dangerTime1">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                  <datetimepicker   data-ng-model="addCase.dangerTime1 " 
+                                  data-datetimepicker-config="{ dropdownSelector: '#dropdown2' ,minuteStep:1}"></datetimepicker>
+                              </ul>
+                        </div>
+
+                                    <!-- <input type="text" class="form-control" id="input13" placeholder="请输入出险时间" ng-model="addCase.dangerTime">-->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input13" class="col-xs-5 control-label">出险时间</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input13" placeholder="请输入出险时间">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-5 control-label">是否快赔</label>
+                                <div class="col-xs-7">
+
+                                    
+   
+
+                                    <label class="radio-inline">
+                                        <input type="radio" ng-value=true ng-model="addCase.fastPay" name="2">是
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" ng-value=false ng-model="addCase.fastPay" name="2">否
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label class="col-xs-5 control-label">是否快赔</label>
-                            <div class="col-xs-7">
-                                <label class="radio-inline">
-                                    <input type="radio" name="2"> 是
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="2"> 否
-                                </label>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-5 control-label">损失类型</label>
+                                <div class="col-xs-7">
+                                    <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="addCase.lossType.person">
+                                        人伤
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" ng-model="addCase.lossType.goods">物损
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label class="col-xs-5 control-label">损失类型</label>
-                            <div class="col-xs-7">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> 人伤
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> 物损
-                                </label>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input14" class="col-xs-5 control-label"><span class="text-red">*</span>事故描述</label>
+                                <div class="col-xs-7">
+                                    <textarea class="form-control" id="input14" rows="3" required ng-model="addCase.describe"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input14" class="col-xs-5 control-label"><span class="text-red">*</span>事故描述</label>
-                            <div class="col-xs-7">
-                                <textarea class="form-control" id="input14" rows="3"></textarea>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input15" class="col-xs-5 control-label">重点关注</label>
+                                <div class="col-xs-7">
+                                    <textarea class="form-control" id="input15" rows="3" ng-model="addCase.focus"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input15" class="col-xs-5 control-label">重点关注</label>
-                            <div class="col-xs-7">
-                                <textarea class="form-control" id="input15" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-xs-12 text-center mt15">
                         <a class="btn btn-primary mr10">保存</a>
                         <a class="btn btn-primary" data-toggle="modal" data-target="#note">备注</a>
@@ -271,7 +342,7 @@
                 <table class="table table-striped minWidth960">
                     <thead>
                     <tr>
-                        <th><input type="checkbox"></th>
+                        <th><input type="checkbox"  ng-model="selectAll" ng-click="all(selectAll)"></th>
                         <th>任务类型</th>
                         <th>派工状态</th>
                         <th>车牌号</th>
@@ -282,28 +353,19 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>任务类型</td>
-                        <td>派工状态</td>
-                        <td>车牌号</td>
-                        <td>品牌型号</td>
-                        <td>委托机构</td>
-                        <td>承保机构</td>
-                        <td><button class="btn btn-default btn-sm">恢复</button></td>
+                    <tr ng-repeat="(key,task) in tasks">
+                        <td><input type="checkbox"  ng-model="task.taskstate" ng-click="one()"></td>
+                        <td>{{task.taskType}}</td>
+                        <td>{{task.billState}}</td>
+                        <td>{{task.carNum}}</td>
+                        <td>{{task.carBrand}}</td>
+                        <td>{{task.delegate_orgName}}</td>
+                        <td>{{task.insurerName}}</td>
+                        <td ng-if="!task.isLock"><button class="btn btn-default btn-sm"  ng-click="!task.isLock">锁定{{task.isLock}}</button></td>
+                        <td ng-if="task.isLock"><button class="btn btn-default btn-sm"  ng-click="!task.isLock">恢复{{task.isLock}}</button></td>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>任务类型</td>
-                        <td>派工状态</td>
-                        <td>车牌号</td>
-                        <td>品牌型号</td>
-                        <td>委托机构</td>
-                        <td>承保机构</td>
-                        <td><button class="btn btn-default btn-sm">锁定</button></td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
+                    <!-- <tr>
+                        <td><input type="checkbox" ng-checked="selectAll" ng-model="task.state"></td>
                         <td>任务类型</td>
                         <td>派工状态</td>
                         <td>车牌号</td>
@@ -313,7 +375,7 @@
                         <td><button class="btn btn-default btn-sm">锁定</button></td>
                     </tr>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" ng-checked="selectAll" ng-model="task.state"></td>
                         <td>任务类型</td>
                         <td>派工状态</td>
                         <td>车牌号</td>
@@ -322,6 +384,16 @@
                         <td>承保机构</td>
                         <td><button class="btn btn-default btn-sm">锁定</button></td>
                     </tr>
+                    <tr>
+                        <td><input type="checkbox" ng-checked="selectAll" ng-model="task.state"></td>
+                        <td>任务类型</td>
+                        <td>派工状态</td>
+                        <td>车牌号</td>
+                        <td>品牌型号</td>
+                        <td>委托机构</td>
+                        <td>承保机构</td>
+                        <td><button class="btn btn-default btn-sm">锁定</button></td>
+                    </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -443,7 +515,7 @@
                             <div class="form-group">
                                 <label for="inputPT1" class="col-xs-5 control-label"><span class="text-red">*</span>车牌号</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT1" placeholder="请输入车牌号">
+                                    <input type="text" class="form-control" id="inputPT1" placeholder="请输入车牌号">
                                 </div>
                             </div>
                         </div>
@@ -467,7 +539,7 @@
                             <div class="form-group">
                                 <label for="inputPT2" class="col-xs-5 control-label"><span class="text-red">*</span>联系人</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT2" placeholder="请输入联系人">
+                                    <input type="text" class="form-control" id="inputPT2" placeholder="请输入联系人">
                                 </div>
                             </div>
                         </div>
@@ -475,7 +547,7 @@
                             <div class="form-group">
                                 <label for="inputPT3" class="col-xs-5 control-label"><span class="text-red">*</span>联系电话</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT3" placeholder="请输入联系电话">
+                                    <input type="text" class="form-control" id="inputPT3" placeholder="请输入联系电话">
                                 </div>
                             </div>
                         </div>
@@ -483,7 +555,7 @@
                             <div class="form-group">
                                 <label for="inputPT4" class="col-xs-5 control-label"><span class="text-red">*</span>车辆型号</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT4" placeholder="请输入车辆型号">
+                                    <input type="text" class="form-control" id="inputPT4" placeholder="请输入车辆型号">
                                 </div>
                             </div>
                         </div>
@@ -491,7 +563,7 @@
                             <div class="form-group">
                                 <label for="inputPT5" class="col-xs-5 control-label"><span class="text-red">*</span>维修厂名称</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT5" placeholder="请输入维修厂名称">
+                                    <input type="text" class="form-control" id="inputPT5" placeholder="请输入维修厂名称">
                                 </div>
                             </div>
                         </div>
@@ -499,7 +571,7 @@
                             <div class="form-group">
                                 <label for="inputPT6" class="col-xs-5 control-label"><span class="text-red">*</span>维修厂联系人</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT6" placeholder="请输入维修厂联系人">
+                                    <input type="text" class="form-control" id="inputPT6" placeholder="请输入维修厂联系人">
                                 </div>
                             </div>
                         </div>
@@ -507,7 +579,7 @@
                             <div class="form-group">
                                 <label for="inputPT7" class="col-xs-5 control-label"><span class="text-red">*</span>维修厂联系电话</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT7" placeholder="请输入维修厂联系电话">
+                                    <input type="text" class="form-control" id="inputPT7" placeholder="请输入维修厂联系电话">
                                 </div>
                             </div>
                         </div>
@@ -515,7 +587,7 @@
                             <div class="form-group">
                                 <label for="inputPT8" class="col-xs-5 control-label">维修厂地址</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT8" placeholder="请输入维修厂地址">
+                                    <input type="text" class="form-control" id="inputPT8" placeholder="请输入维修厂地址">
                                 </div>
                             </div>
                         </div>
@@ -523,7 +595,7 @@
                             <div class="form-group">
                                 <label for="inputPT9" class="col-xs-5 control-label">备注</label>
                                 <div class="col-xs-7">
-                                    <input type="password" class="form-control" id="inputPT9" placeholder="请输入备注">
+                                    <input type="text" class="form-control" id="inputPT9" placeholder="请输入备注">
                                 </div>
                             </div>
                         </div>
@@ -610,7 +682,208 @@
         </div>
     </div>
 </div>
-<script src="../js/jquery.min.js"></script>
+<script src="../js/moment.js"></script>
+<script src="../js/locale/zh-cn.js"></script>
+<script  src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script src="../js/angular.min.js"></script>
+<script src="../js/service.js"></script>
+<script src="../js/datetimepicker.js"></script>
+<script src="../js/datetimepicker.templates.js"></script>
+<script>
+    var app = angular.module("app",['MyService','ui.bootstrap.datetimepicker']);
+    app.controller('ctrl', ['$scope','$http','urlService', '$timeout','$parse','$filter','$window',function($scope,$http,urlService,$timeout,$parse,$filter,$window){
+        moment.locale('zh-cn');
+        $scope.addCase={}
+        $scope.addCase.delegate_org={};
+        $scope.addCase.insurer={};
+        $scope.addCase.scene_type={};
+        $scope.addCase.scene_resp={};
+        $scope.addCase.lossType={};
+        var data=JSON.parse(localStorage.getItem("addCaseMsg"));
+
+        $scope.addCase.delegate_org=JSON.parse(localStorage.getItem("delegate_org"))
+        $scope.addCase.scene_resp =JSON.parse(localStorage.getItem("scene_resp"))
+        $scope.addCase.insurer=JSON.parse(localStorage.getItem("insurer"))
+        $scope.addCase.scene_type=JSON.parse(localStorage.getItem("scene_type"))
+        console.log(localStorage.getItem("addCaseMsg"))
+
+        // localStorage.removeItem("addCaseMsg");
+
+        // 委托机构
+        $scope.addCase.delegate_org.selectId=data.msg.T_CASE_INFO.delegateOrgId
+        // 承保机构
+        $scope.addCase.insurer.selectId=data.msg.T_CASE_INFO.insurerId
+        // 报案号 
+        $scope.addCase.reportNum =data.msg.T_CASE_INFO.caseId;
+        // 车主
+        $scope.addCase.owner=data.msg.T_CASE_INFO.ownerName
+        // 车牌号 
+        $scope.addCase.carNum =data.msg.T_CASE_INFO.carNumber
+        // 车辆品牌
+        $scope.addCase.carBrand =data.msg.T_CASE_INFO.carBrand
+        // 联系人
+        $scope.addCase.contact=data.msg.T_CASE_INFO.reporterName
+        // 联系电话  
+        $scope.addCase.contactPhone =data.msg.T_CASE_INFO.reporterPhone     
+        // 事故地点
+        $scope.addCase.accidentLocation =data.msg.T_CASE_INFO.sceneLocation
+        // 事故类型 
+        $scope.addCase.scene_type.selectId= data.msg.T_CASE_INFO.sceneTypeId
+
+
+        // 事故责任 
+        $scope.addCase.scene_resp.selectId=data.msg.T_CASE_INFO.sceneRespId
+        // 报案时间 
+        // $scope.addCase.reportTime=data.msg.T_CASE_INFO.reportTime
+        
+        var reportTime=data.msg.T_CASE_INFO.reportTime;
+        $scope.addCase.reportTime=new Date(Number(reportTime.year),Number(reportTime.month),Number(reportTime.day),Number(reportTime.hours),Number(reportTime.minutes))
+         $scope.addCase.reportTime1 = $filter("date")($scope.addCase.reportTime, "yyyy-MM-dd HH:mm");
+        // 出险时间 
+        // $scope.addCase.dangerTime =data.msg.T_CASE_INFO.sceneTime
+        var sceneTime=data.msg.T_CASE_INFO.sceneTime;
+        $scope.addCase.dangerTime=new Date(Number(sceneTime.year),Number(sceneTime.month),Number(sceneTime.day),Number(sceneTime.hours),Number(sceneTime.minutes),0)
+         $scope.addCase.dangerTime1 = $filter("date")($scope.addCase.dangerTime, "yyyy-MM-dd HH:mm");
+
+         $scope.$watch('addCase.reportTime1',function(newValue,oldValue, scope){
+                scope.addCase.reportTime1 = $filter("date")(newValue, "yyyy-MM-dd HH:mm");
+                scope.addCase.reportTime=new Date($scope.addCase.reportTime1)
+               })
+
+               $scope.$watch('addCase.dangerTime1',function(newValue,oldValue, scope){
+                scope.addCase.dangerTime1 = $filter("date")(newValue, "yyyy-MM-dd HH:mm");
+                scope.addCase.dangerTime=new Date($scope.addCase.dangerTime1)
+               })
+
+        // 快赔
+        $scope.addCase.fastPay  =Boolean(data.msg.T_CASE_INFO.isQuick)
+        // 损失类型 
+        $scope.addCase.lossType.person =Boolean(data.msg.T_CASE_INFO.isHumanHurt)
+
+        $scope.addCase.lossType.goods=Boolean(data.msg.T_CASE_INFO.isMatDamage)
+
+        // 事故描述
+        $scope.addCase.describe =data.msg.T_CASE_INFO.sceneDesc
+        // 重点关注
+        $scope.addCase.focus =data.msg.T_CASE_INFO.importDesc
+
+        $scope.tasks=[{},{},{}];
+        // 任务id      
+        $scope.tasks[1].taskId=data.msg.T_TARGET_BILL.billId
+        // 选择状态    
+        $scope.tasks[1].taskstate=true
+        // 任务类型    
+        $scope.tasks[1].taskType=data.msg.T_TARGET_BILL.billType
+        // 派工状态    
+        $scope.tasks[1].billState=data.msg.T_TARGET_BILL.billStateId
+        // 车牌号      
+        $scope.tasks[1].carNum=data.msg.T_TARGET_BILL.targetCarNo
+        // 品牌型号    
+        $scope.tasks[1].carBrand=data.msg.T_TARGET_BILL.targetBrand
+        // 委托机构    
+        $scope.tasks[1].delegate_orgName='2'
+        // $scope.addCase.delegate_org[data.msg.T_CASE_INFO.delegateOrgId]
+        // 承保机构  
+        $scope.tasks[1].insurerName='2'
+        // $scope.addCase.insurer[data.msg.T_CASE_INFO.insurerId]
+        // 操作      
+        $scope.tasks[1].isLock=Boolean(data.msg.T_TARGET_BILL.isLock)
+
+
+        // 任务id     
+        $scope.tasks[0].taskId=data.msg.T_SURVEY_BILL.billId
+        // 选择状态    
+        $scope.tasks[0].taskstate=true
+        // 任务类型    
+        $scope.tasks[0].taskType=data.msg.T_SURVEY_BILL.billType
+        // 派工状态    
+        $scope.tasks[0].billState=data.msg.T_SURVEY_BILL.billStateId
+        // 车牌号      
+        $scope.tasks[0].carNum=data.msg.T_SURVEY_BILL.targetCarNo
+        // 品牌型号    
+        $scope.tasks[0].carBrand=data.msg.T_SURVEY_BILL.targetBrand
+        // 委托机构    
+        $scope.tasks[0].delegate_orgName='1'
+        // $scope.addCase.delegate_org[data.msg.T_SURVEY_BILL.delegateOrgId]
+        // 承保机构  
+        $scope.tasks[0].insurerName='1'
+        // $scope.addCase.insurer[data.msg.T_SURVEY_BILL.insurerId]
+        // 操作      
+        $scope.tasks[0].isLock=Boolean(data.msg.T_SURVEY_BILL.isLock)
+
+
+        if(data.msg.T_THIRD_BILL){
+        // 任务id      
+        $scope.tasks[2].taskId=data.msg.T_THIRD_BILL.billId
+        // 选择状态    
+        $scope.tasks[2].taskstate=true
+        // 任务类型    
+        $scope.tasks[2].taskType=data.msg.T_THIRD_BILL.billType
+        // 派工状态    
+        $scope.tasks[2].billState=data.msg.T_THIRD_BILL.billStateId
+        // 车牌号      
+        $scope.tasks[2].carNum=data.msg.T_THIRD_BILL.targetCarNo
+        // 品牌型号    
+        $scope.tasks[2].carBrand=data.msg.T_THIRD_BILL.targetBrand
+        // 委托机构    
+        $scope.tasks[2].delegate_orgName='3'
+        // $scope.addCase.delegate_org[data.msg.T_THIRD_BILL.delegateOrgId]
+        // 承保机构  
+        $scope.tasks[2].insurerName='3'
+        // $scope.addCase.insurer[data.msg.T_THIRD_BILL.insurerId]
+        // 操作      
+        $scope.tasks[2].isLock=Boolean(data.msg.T_THIRD_BILL.isLock) 
+        }
+        console.log($scope.tasks)
+
+
+        $scope.selectAll=true;  
+       
+        $scope.all= function (m) {  
+            for(var i=0;i<$scope.tasks.length;i++){  
+                if(m===true){  
+                    $scope.tasks[i].taskstate=true;  
+                }else {  
+                    $scope.tasks[i].taskstate=false;  
+                }  
+            }  
+        };  
+
+        $scope.one= function () {  
+             
+            for(var i=0;i<$scope.tasks.length;i++){  
+                    if(!$scope.tasks[i].taskstate){
+                      $timeout(function() {
+                        $scope.selectAll=false; 
+                    })
+                      return;
+                    }
+                }
+                $timeout(function() {
+                    $scope.selectAll=true; 
+                    $parse($scope.selectAll)($scope);
+                    
+                })
+            }
+        
+       // $http({
+       //          method: 'POST',
+       //          url: urlService.getCommonUrl()+'case/add',
+       //          headers: {'Content-Type': 'application/json'},
+       //          transformRequest: function(obj) {
+       //              var str = [];
+       //              for(var p in obj)
+       //              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+       //              return str.join("&");
+
+       //              }
+       //          }).then(function(data) {
+       //              console.log(data)
+       //          },function(error){
+       //                   console.log(error)
+       //          })
+    }])
+</script>
 </body>
 </html>

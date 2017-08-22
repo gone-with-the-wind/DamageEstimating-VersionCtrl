@@ -119,7 +119,8 @@
         
 
                     else if(Number(obj.code)==2){
-                        window.location.href="../dispatch/dispatch.html";
+                       var encodeData = window.btoa(window.encodeURIComponent(tel));
+                        window.location.href="../dispatch/dispatch.html?#phone="+encodeData;
 
                     }
                         // var str = data.msg;

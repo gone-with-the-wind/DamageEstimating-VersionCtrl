@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新增案件</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/datetimepicker.css">
     <link href="../css/main.css" rel="stylesheet">
 </head>
 <body ng-app="app" ng-controller="ctrl">
@@ -70,487 +71,691 @@
 <!--内容-->
 <div class="m_container">
     <div class="container-fluid">
+
         <div class="dpc_box1 mt15">
-            <form class="form-horizontal">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <div class="col-xs-offset-2 col-xs-10">
-                                <label class="radio-inline">
-                                    <input type="radio" name="1"> 协议委托
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="1"> 非协议委托
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="1"> 非车险
-                                </label>
+            <form role="form" name="myForm" ng-submit="submitForm()" class="form-horizontal" novalidate>
+             
+                    <!-- <div class="row"> -->
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <label class="radio-inline">
+                                        <input type="radio" name="1"> 协议委托
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="1"> 非协议委托
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="1"> 非车险
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input1" class="col-xs-5 control-label"><span class="text-red">*</span>委托机构</label>
-                            <div class="col-xs-7">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input1" class="col-xs-5 control-label"><span class="text-red">*</span>委托机构</label>
+                                <div class="col-xs-7">
+                                    <select class="form-control"
+                                        ng-model="addCase.delegate_org.selectId"
+                                        ng-options="value.delegateOrgId as value.delegateOrgName for value in addCase.delegate_org" required>
+                                        <option value="">--</option>
+                                    </select>
+                                    <!-- <select class="form-control" id="input1">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input2" class="col-xs-5 control-label">承保机构</label>
+                                <div class="col-xs-7">
+
+
+                                    <select class="form-control"
+                                        ng-model="addCase.insurer.selectId"
+                                        ng-options="value.insurerId as value.insurerName for value in addCase.insurer" >
+                                        <option value="">--</option>
+                                    </select>
+                                    <!-- <input type="password" class="form-control" id="input2" placeholder="请输入承保机构" ng-model="addCase.insurer.insurerName"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input3" class="col-xs-5 control-label"><span class="text-red">*</span>报案号</label>
+                                <div class="col-xs-7">
+                                    <input type="password" class="form-control" id="input3" placeholder="请输入报案号" required ng-model="addCase.reportNum">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input4" class="col-xs-5 control-label"><span class="text-red">*</span>车主</label>
+                                <div class="col-xs-7">
+                                    <input type="password" class="form-control" id="input4" placeholder="请输入车主" required ng-model='addCase.owner'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input5" class="col-xs-5 control-label"><span class="text-red">*</span>车牌号</label>
+                                <div class="col-xs-7">
+                                    <input type="password" class="form-control" id="input5" placeholder="请输入车牌号" required ng-model="addCase.carNum">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input6" class="col-xs-5 control-label">车辆品牌</label>
+                                <div class="col-xs-7">
+                                    <input type="password" class="form-control" id="input6" placeholder="请输入车辆品牌" ng-model="addCase.carBrand">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input7" class="col-xs-5 control-label"><span class="text-red">*</span>联系人</label>
+                                <div class="col-xs-7">
+                                    <input type="password" class="form-control" id="input7" placeholder="请输入联系人" required ng-model="addCase.contact">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group has-feedback">
+                                <label for="input8" class="col-xs-5 control-label"><span class="text-red">*</span>联系电话</label>
+                                <div class="col-xs-7">
+                                    <input type="password" class="form-control" id="input8" placeholder="请输入联系电话" required ng-model="addCase.contactPhone" ng-pattern="/^1\d{10}$/" name="contactPhone">
+                                    <span class="glyphicon glyphicon-ok form-control-feedback"
+                              ng-show="myForm.contactPhone.$dirty && myForm.contactPhone.$valid"></span>
+
+                              <span class="glyphicon glyphicon-remove form-control-feedback"
+                              ng-show="myForm.contactPhone.$dirty && myForm.contactPhone.$invalid"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input9" class="col-xs-5 control-label">事故地点</label>
+                                <div class="col-xs-7">
+                                    <input type="password" class="form-control" id="input9" placeholder="请输入事故地点" ng-model="addCase.accidentLocation">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input10" class="col-xs-5 control-label">事故类型</label>
+                                <div class="col-xs-7">
+                                    <!-- <select class="form-control" id="input10"> -->
+
+
+                                    <select class="form-control"
+                                        ng-model="addCase.scene_type.selectId"
+                                        ng-options="value.typeId as value.typeDesc for value in addCase.scene_type">
+                                        <option value="">--</option>
+                                    </select>
+                                       
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input11" class="col-xs-5 control-label">事故责任</label>
+                                <div class="col-xs-7">
+
                                 <select class="form-control"
-                                    ng-model="info.delegate_org.selectId"
-                                    ng-options="value.delegateOrgId as value.delegateOrgName for value in info.delegate_org">
-                                    <option>--</option>
-                                </select>
-                                <!-- <select class="form-control" id="input1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input2" class="col-xs-5 control-label">承保机构</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input2" placeholder="请输入承保机构" ng-model="info.insurer.insurerName">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input3" class="col-xs-5 control-label"><span class="text-red">*</span>报案号</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input3" placeholder="请输入报案号">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input4" class="col-xs-5 control-label"><span class="text-red">*</span>车主</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input4" placeholder="请输入车主">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input5" class="col-xs-5 control-label"><span class="text-red">*</span>车牌号</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input5" placeholder="请输入车牌号">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input6" class="col-xs-5 control-label">车辆品牌</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input6" placeholder="请输入车辆品牌">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input7" class="col-xs-5 control-label"><span class="text-red">*</span>联系人</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input7" placeholder="请输入联系人">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input8" class="col-xs-5 control-label"><span class="text-red">*</span>联系电话</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input8" placeholder="请输入联系电话">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input9" class="col-xs-5 control-label">事故地点</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input9" placeholder="请输入事故地点">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input10" class="col-xs-5 control-label">事故类型</label>
-                            <div class="col-xs-7">
-                                <!-- <select class="form-control" id="input10"> -->
+                                        ng-model="addCase.scene_resp.selectId"
+                                        ng-options="value.respId as value.respDesc for value in addCase.scene_resp">
+                                        <option value="">--</option>
+                                    </select>
+                                    <!-- <select class="form-control" id="input11">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select> -->
 
 
-                                <select class="form-control"
-                                    ng-model="info.scene_type.selectId"
-                                    ng-options="value.typeId as value.typeDesc for value in info.scene_type">
-                                    <option>--</option>
-                                </select>
-                                   
+                                    
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input11" class="col-xs-5 control-label">事故责任</label>
-                            <div class="col-xs-7">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input12" class="col-xs-5 control-label">报案时间</label>
+                                <div class="col-xs-7">
+                                   <div class="dropdown1">
+                                    <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target=".dropdown1" href="#">
+                                      <div class="input-group">
+                                        <input type="text" id="date1" name="date1" class="form-control" data-ng-model="addCase.reportTime1">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                  <datetimepicker   data-ng-model="addCase.reportTime1 " 
+                                  data-datetimepicker-config="{ dropdownSelector: '#dropdown1' ,minuteStep:1}"></datetimepicker>
+                              </ul>
+                        </div>
 
-                            <select class="form-control"
-                                    ng-model="info.scene_resp.selectId"
-                                    ng-options="value.respId as value.respDesc for value in info.scene_resp">
-                                    <option>--</option>
-                                </select>
-                                <!-- <select class="form-control" id="input11">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select> -->
+                               <!--  <input size="16" type="text" ng-model="addCase.reportTime" readonly class="form_datetime form-control" id="input12">
+                                </div> -->
 
 
-                                
+                             <!--    <div class="input-group col-xs-7 date  form_datetime" data-date-format="dd MM yyyy - HH:ii p" >
+                                    
+                                        <input class="form-control" type="text" ng-model="addCase.reportTime" readonly  id="input12">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+                                    
+                                    </div> -->
+
+                                    
+                                </div>
+                            </div>
+                           </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input13" class="col-xs-5 control-label">出险时间</label>
+                                <div class="col-xs-7">
+                                  <div class="dropdown2">
+                                    <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target=".dropdown2" href="#">
+                                      <div class="input-group">
+                                        <input type="text" id="date2" name="date2" class="form-control" data-ng-model="addCase.dangerTime1">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                  <datetimepicker   data-ng-model="addCase.dangerTime1 " 
+                                  data-datetimepicker-config="{ dropdownSelector: '#dropdown2' ,minuteStep:1}"></datetimepicker>
+                              </ul>
+                        </div>
+
+                                    <!-- <input type="password" class="form-control" id="input13" placeholder="请输入出险时间" ng-model="addCase.dangerTime">-->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input12" class="col-xs-5 control-label">报案时间</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input12" placeholder="请输入报案时间">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-5 control-label">是否快赔</label>
+                                <div class="col-xs-7">
+
+                                    
+   
+
+                                    <label class="radio-inline">
+                                        <input type="radio" ng-value=true ng-model="addCase.fastPay" name="2">是
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" ng-value=false ng-model="addCase.fastPay" name="2">否
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input13" class="col-xs-5 control-label">出险时间</label>
-                            <div class="col-xs-7">
-                                <input type="password" class="form-control" id="input13" placeholder="请输入出险时间">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label class="col-xs-5 control-label">损失类型</label>
+                                <div class="col-xs-7">
+                                    <label class="checkbox-inline">
+                                    <input type="checkbox" ng-model="addCase.lossType.person">
+                                        人伤
+                                    </label>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" ng-model="addCase.lossType.goods">物损
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label class="col-xs-5 control-label">是否快赔</label>
-                            <div class="col-xs-7">
-                                <label class="radio-inline">
-                                    <input type="radio" name="2"> 是
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="2"> 否
-                                </label>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input14" class="col-xs-5 control-label"><span class="text-red">*</span>事故描述</label>
+                                <div class="col-xs-7">
+                                    <textarea class="form-control" id="input14" rows="3" required ng-model="addCase.describe"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label class="col-xs-5 control-label">损失类型</label>
-                            <div class="col-xs-7">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> 人伤
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox"> 物损
-                                </label>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="form-group">
+                                <label for="input15" class="col-xs-5 control-label">重点关注</label>
+                                <div class="col-xs-7">
+                                    <textarea class="form-control" id="input15" rows="3" ng-model="addCase.focus"></textarea>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input14" class="col-xs-5 control-label"><span class="text-red">*</span>事故描述</label>
-                            <div class="col-xs-7">
-                                <textarea class="form-control" id="input14" rows="3"></textarea>
-                            </div>
+
+                        <div class="col-xs-12 form-group  text-center">
+                        <input class="btn btn-primary btn-lg" ng-disabled="myForm.$invalid" type="submit" value="提交" />
                         </div>
+
+                        <!-- <div class="col-xs-12 text-center mt15">
+                            <a class="btn btn-primary" href="dpc_modifyCase.html">确认</a>
+                        </div> -->
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="form-group">
-                            <label for="input15" class="col-xs-5 control-label">重点关注</label>
-                            <div class="col-xs-7">
-                                <textarea class="form-control" id="input15" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 text-center mt15">
-                        <a class="btn btn-primary" href="dpc_modifyCase.html">确认</a>
-                    </div>
-                </div>
             </form>
         </div>
-    </div>
+    <!-- </div> -->
 </div>
-<script src="../js/jquery.min.js"></script>
+<script src="../js/moment.js"></script>
+<script src="../js/locale/zh-cn.js"></script>
+<script  src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
-<script SRC="../js/angular.min.js"></script>
+<script src="../js/angular.min.js"></script>
 <script src="../js/service.js"></script>
+<script src="../js/datetimepicker.js"></script>
+<script src="../js/datetimepicker.templates.js"></script>
 <script>
-    var app=angular.module("app",['MyService']);
-    app.controller('ctrl', ['$scope','$http','urlService', function($scope,$http,urlService){
-        // $http.get(urlService.getCommonUrl()+'information/get')
-    
-                $scope.info={}
-                // headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+
+          
+    // $('.form_datetime').datetimepicker({
+    //     language:  'CN',
+    //     weekStart: 1,
+    //     // todayBtn:  1,
+    //     autoclose: 1,
+    //     todayHighlight: 1,
+    //     startView: 2,
+    //     forceParse: 0,
+    //     showMeridian: 1,
+    //     format: 'yyyy-mm-dd hh:ii'
+    // });
+    var app=angular.module("app",['MyService','ui.bootstrap.datetimepicker']);
+    app.controller('ctrl', ['$scope','$http','urlService', '$filter','$window',function($scope,$http,urlService,$filter,$window){
+               moment.locale('zh-cn');
+               $scope.addCase={}
+               $scope.addCase.delegate_org={};
+               $scope.addCase.insurer={};
+               $scope.addCase.scene_type={};
+               $scope.addCase.scene_resp={};
+               $scope.addCase.lossType={};
+               $scope.addCase.lossType.person=false; 
+                $scope.addCase.lossType.goods=false;
+               $scope.addCase.reportTime1=new Date();
+               $scope.addCase.dangerTime1=new Date();
+               $scope.addCase.reportTime=$scope.addCase.reportTime1;
+               $scope.addCase.dangerTime=$scope.addCase.dangerTime1;
+
+               $scope.addCase.reportTime1 = $filter("date")($scope.addCase.reportTime1, "yyyy-MM-dd HH:mm");
+               $scope.addCase.dangerTime1 = $filter("date")($scope.addCase.dangerTime1, "yyyy-MM-dd HH:mm");
+
+               $scope.$watch('addCase.reportTime1',function(newValue,oldValue, scope){
+                scope.addCase.reportTime1 = $filter("date")(newValue, "yyyy-MM-dd HH:mm");
+                scope.addCase.reportTime=new Date($scope.addCase.reportTime1)
+               })
+
+               $scope.$watch('addCase.dangerTime1',function(newValue,oldValue, scope){
+                scope.addCase.dangerTime1 = $filter("date")(newValue, "yyyy-MM-dd HH:mm");
+                scope.addCase.dangerTime=new Date($scope.addCase.dangerTime1)
+               })
+
+
+               
+
+               // | date:'yyyy-MM-dd HH:mm'
+                // SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd hh:ii");
+                // $scope.addCase.reportTime= sdf.format($scope.addCase.reportTime);
+                
+                //$scope.addCase.delegate_org  委托机构
+                //$scope。addCase.insurer.insurerName   承保机构
+                //$scope.addCase.reportNum  报案号
+                //$scope.addCase.owner  车主
+                //$scope.addCase.carNum 车牌号
+                //$scope.addCase.carBrand 车辆品牌
+                //$scope.addCase.contact  联系人
+                //$scope.addCase.contactPhone 联系电话
+                //$scope.addCase.accidentLocation   事故地点
+                //$scope.addCase.scene_type  事故类型
+                //$scope.addCase.scene_resp 事故责任
+                //$scope.addCase.reportTime 报案时间
+                //$scope.addCase.dangerTime 出险时间
+                //$scope.addCase.fastPay  快赔
+                //$scope.addCase.lossType.person  
+                //$scope.addCase.lossType.goods损失类型
+                //$scope.addCase.describe 事故描述
+                //$scope.addCase.focus重点关注
+                
+                $scope.submitForm = function() {
+                    // console.log(angular.toJson($scope.addCase,0))
+                     var postData={
+                   'caseId':$scope.addCase.reportNum,
+                   'delegateType':1,
+                   'delegateOrgId':$scope.addCase.delegate_org.selectId,
+                   'insurerId':$scope.addCase.insurer.insurerName,
+                   'ownerName':$scope.addCase.owner,
+                   'carNumber':$scope.addCase.carNum,
+                   'carBrand':$scope.addCase.carBrand,
+                   'reporterName':$scope.addCase.contact,
+                   'reporterPhone':$scope.addCase.contactPhone,
+                   'sceneLocation':$scope.addCase.accidentLocation,
+                   'sceneTypeId':$scope.addCase.scene_type.selectId,
+                   'sceneRespId':$scope.addCase.scene_resp.selectId,
+                   'reportTime':$scope.addCase.reportTime,
+                   'sceneTime':$scope.addCase.dangerTime,
+                   'isQuick':$scope.addCase.fastPay,
+                   'isHumanHurt':$scope.addCase.lossType.person,  
+                   'isMatDamage':$scope.addCase.lossType.goods,
+                   'sceneDesc':$scope.addCase.describe,
+                   'importDesc':$scope.addCase.focus,
+                   'createUserId':"ffy8weu34423244"
+                };
+                $http({
+                    method: 'POST',
+                    url: urlService.getCommonUrl()+'case/add',
+                    headers: {'Content-Type': 'application/json','accesskey':'acaaaa'},
+                    data:postData
+
+                    // transformRequest: function(obj) {
+                    //     var str = [];
+                    //     for(var p in obj)
+                    //     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    //     return str.join("&");
+
+                    //     }
+                    }).then(function(data) {
+                        if(Number(data.data.code)===0){
+                             addCaseMsg = JSON.stringify(data.data);
+                             localStorage.setItem("addCaseMsg", addCaseMsg) ;
+                             $window.location.href='dpc_modifyCase.html';
+
+                        }
+                        
+                    },function(error){
+                        console.log(error)
+                    })
+                }
+                             
+               
+                
+                // $http({
+                // method: 'GET',
+
+                // url: urlService.getCommonUrl()+'information/get',
+                // headers:{'accessKey':'acaaaa'}
+                
+                // })
+                // .then(function(data) {
+                //     // var obj=(new Function("","return "+data))(); 
+                //     console.log(data)
+                //     if(data.data.code===0){
+                //         $scope.addCase.delegate_org=data.data.msg.delegate_org;
+                //         $scope.addCase.scene_resp =data.data.msg.scene_resp;
+                //         $scope.addCase.insurer=data.data.msg.insurer;
+                //         $scope.addCase.scene_type=data.data.msg.scene_type;
+                //     }else{
+                //         console.log(data);
+                //     }
+                // }, function(error) {
+                //      console.log('error'+error)
+                // });
+
+
+
+                 
+
                 $http({
                 method: 'GET',
 
-                url: urlService.getCommonUrl()+'information/get'
-                // headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                // data: 'login_id='+$scope.userdata.username+'&pwd='+$scope.userdata.password
+                url: urlService.getCommonUrl()+'information/get',
+                headers:{'accesskey':'acaaaa'}
+                
                 })
                 .then(function(data) {
                     // var obj=(new Function("","return "+data))(); 
-
-                    console.log(data)
+                    // console.log(data)
                     if(data.data.code===0){
+                        $scope.addCase.delegate_org=data.data.msg.delegate_org;
+                        $scope.addCase.scene_resp =data.data.msg.scene_resp;
+                        $scope.addCase.insurer=data.data.msg.insurer;
+                        $scope.addCase.scene_type=data.data.msg.scene_type;
 
-                        $scope.info.delegate_org=data.data.msg.delegate_org;
-                        $scope.info.scene_resp =data.data.msg.scene_resp;
-                        $scope.info.insurer=data.data.msg.insurer;
-                        $scope.info.scene_type=data.data.msg.scene_type;
-                        
+                        var delegate_org = JSON.stringify($scope.addCase.delegate_org);
+                        var scene_resp= JSON.stringify($scope.addCase.scene_resp);
+
+                        var insurer=JSON.stringify($scope.addCase.insurer);
+                        var scene_type=JSON.stringify($scope.addCase.scene_type);
+                            localStorage.setItem("delegate_org", delegate_org) ;
+                            localStorage.setItem("scene_resp", scene_resp) ;
+                            localStorage.setItem("insurer", insurer) ;
+                            localStorage.setItem("scene_type", scene_type) ;
 
                     }else{
-
+                        // console.log(data);
                     }
-                    
-                
                 }, function(error) {
-                     console.log("error:"+error)
+                     // console.log('error'+error)
                 });
-        
-    }])
-
-
-
-//     {
-//   "msg": {       
-//     "scene_resp": [
-//       {
-//         "createTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 2,
-//           "month": 7,
-//           "seconds": 41,
-//           "time": 1502762561000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "createUserId": "1",
-//         "isLock": 0,
-//         "lastEditTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 2,
-//           "month": 7,
-//           "seconds": 44,
-//           "time": 1502762564000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "lastEditUserId": "1",
-//         "respDesc": "测试责任类型A",
-//         "respId": "1",
-//         "sort": 1
-//       },
-//       {
-//         "createTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 3,
-//           "month": 7,
-//           "seconds": 4,
-//           "time": 1502762584000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "createUserId": "1",
-//         "isLock": 0,
-//         "lastEditTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 3,
-//           "month": 7,
-//           "seconds": 11,
-//           "time": 1502762591000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "lastEditUserId": "1",
-//         "respDesc": "测试责任类型B",
-//         "respId": "2",
-//         "sort": 1
-//       }
-//     ],
-//     "delegate_org": [
-//       {
-//         "contackPhone": "13333333333",
-//         "contackUser": "test",
-//         "createTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 0,
-//           "month": 7,
-//           "seconds": 20,
-//           "time": 1502762420000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "createUserId": "1",
-//         "delegateOrgId": "1",
-//         "delegateOrgName": "测试委托机构A",
-//         "isLock": 0,
-//         "isSign": 1,
-//         "lastEditTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 0,
-//           "month": 7,
-//           "seconds": 24,
-//           "time": 1502762424000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "lastEditUserId": "1",
-//         "orgAddress": "测试地址",
-//         "sort": 1
-//       }
-//     ],
-//     "insurer": [
-//       {
-//         "createTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 9,
-//           "minutes": 58,
-//           "month": 7,
-//           "seconds": 33,
-//           "time": 1502762313000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "createUserId": "1",
-//         "insurerId": "1",
-//         "insurerName": "测试机构A",
-//         "isLock": 0,
-//         "lastEditTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 9,
-//           "minutes": 58,
-//           "month": 7,
-//           "seconds": 39,
-//           "time": 1502762319000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "lastEditUserId": "1",
-//         "sort": 1
-//       },
-//       {
-//         "createTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 9,
-//           "minutes": 58,
-//           "month": 7,
-//           "seconds": 55,
-//           "time": 1502762335000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "createUserId": "1",
-//         "insurerId": "2",
-//         "insurerName": "测试机构B",
-//         "isLock": 0,
-//         "lastEditTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 9,
-//           "minutes": 59,
-//           "month": 7,
-//           "seconds": 1,
-//           "time": 1502762341000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "lastEditUserId": "1",
-//         "sort": 1
-//       }
-//     ],
-//     "scene_type": [
-//       {
-//         "createTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 4,
-//           "month": 7,
-//           "seconds": 15,
-//           "time": 1502762655000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "createUserId": "1",
-//         "isLock": 0,
-//         "lastEditTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 4,
-//           "month": 7,
-//           "seconds": 18,
-//           "time": 1502762658000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "lastEditUserId": "1",
-//         "sort": 1,
-//         "typeDesc": "单车事故",
-//         "typeId": "1"
-//       },
-//       {
-//         "createTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 4,
-//           "month": 7,
-//           "seconds": 30,
-//           "time": 1502762670000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "createUserId": "1",
-//         "isLock": 0,
-//         "lastEditTime": {
-//           "date": 15,
-//           "day": 2,
-//           "hours": 10,
-//           "minutes": 4,
-//           "month": 7,
-//           "seconds": 36,
-//           "time": 1502762676000,
-//           "timezoneOffset": -480,
-//           "year": 117
-//         },
-//         "lastEditUserId": "1",
-//         "sort": 1,
-//         "typeDesc": "多车事故",
-//         "typeId": "2"
-//       }
-//     ]
-//   },
-//   "code": 0
-// }
-
-                                
-
-
-
+             }]) 
+    
 </script>
 </body>
 </html>
+
+
+<!-- {
+  "msg": {
+    "scene_resp": [
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 2,
+          "month": 7,
+          "seconds": 41,
+          "time": 1502762561000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 2,
+          "month": 7,
+          "seconds": 44,
+          "time": 1502762564000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "respDesc": "测试责任类型A",
+        "respId": "1",
+        "sort": 1
+      },
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 3,
+          "month": 7,
+          "seconds": 4,
+          "time": 1502762584000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 3,
+          "month": 7,
+          "seconds": 11,
+          "time": 1502762591000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "respDesc": "测试责任类型B",
+        "respId": "2",
+        "sort": 1
+      }
+    ],
+    "delegate_org": [
+      {
+        "contackPhone": "13333333333",
+        "contackUser": "test",
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 0,
+          "month": 7,
+          "seconds": 20,
+          "time": 1502762420000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "delegateOrgId": "1",
+        "delegateOrgName": "测试委托机构A",
+        "isLock": 0,
+        "isSign": 1,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 0,
+          "month": 7,
+          "seconds": 24,
+          "time": 1502762424000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "orgAddress": "测试地址",
+        "sort": 1
+      }
+    ],
+    "insurer": [
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 58,
+          "month": 7,
+          "seconds": 33,
+          "time": 1502762313000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "insurerId": "1",
+        "insurerName": "测试机构A",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 58,
+          "month": 7,
+          "seconds": 39,
+          "time": 1502762319000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1
+      },
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 58,
+          "month": 7,
+          "seconds": 55,
+          "time": 1502762335000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "insurerId": "2",
+        "insurerName": "测试机构B",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 59,
+          "month": 7,
+          "seconds": 1,
+          "time": 1502762341000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1
+      }
+    ],
+    "scene_type": [
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 15,
+          "time": 1502762655000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 18,
+          "time": 1502762658000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1,
+        "typeDesc": "单车事故",
+        "typeId": "1"
+      },
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 30,
+          "time": 1502762670000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 36,
+          "time": 1502762676000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1,
+        "typeDesc": "多车事故",
+        "typeId": "2"
+      }
+    ]
+  },
+  "code": 0
+} -->

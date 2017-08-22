@@ -21,12 +21,12 @@
 <div class="m_nav">
     <ul class="m_navUl">
         <li>
-            <i class="glyphicon glyphicon-log-out mr10">调度</i>
-            <ul class="m_nav_ul">
-                <li><a class="m_nav_a active" href="dispatch.html"><i class="glyphicon glyphicon-option-horizontal mr10"></i>未调度</a></li>
-                <li><a class="m_nav_a" href="dispatch_backCase.html"><i class="glyphicon glyphicon-remove mr10"></i>退回案件查询</a></li>
-                <li><a class="m_nav_a" href="dispatch_caseSearch.html"><i class="glyphicon glyphicon-search mr10"></i>任务查询</a></li>
-            </ul>
+            
+            <a class="m_navA" href="survey.html"><i class="glyphicon glyphicon-log-out mr10"></i>调度</a>
+                <ul class="m_nav_ul" ng-repeat="v in userstatus">
+                    <li><a class="m_nav_a active" ng-href="v.pageUrl"><i class="glyphicon glyphicon-option-horizontal mr10"></i>{{v.id}}</a></li>
+                
+                </ul>
         </li>
         <li>
             <a class="m_navA" href="survey.html"><i class="glyphicon glyphicon-log-out mr10"></i>查勘</a>
@@ -393,9 +393,14 @@
 <script type="text/javascript" src="../js/angular.min.js"></script>
 <script type="text/javascript" src="../js/ui.min.js"></script>
 <script type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="../js/encrypt.js"></script>
 <script src="../js/service.js"></script>
 <script type="text/javascript">
-    angular.module('app',['ui.bootstrap','MyService']).controller('ctrl', ['$scope','urlService','$http',function ($scope,urlService,$http) {
+    var app=angular.module('app',['ui.bootstrap','MyService']);
+//     app.config(['$locationProvider', function($locationProvider) {  
+//   $locationProvider.html5Mode(true);  
+// }]);  
+    app.controller('ctrl', ['$scope','urlService','$http','$location','$window',function ($scope,urlService,$http,$location,$window) {
         $scope.today = function() {
             $scope.dt = new Date();
         };
@@ -420,27 +425,68 @@
         $scope.popup1 = {
             opened: false
         };
+        // var login_id=$location.hash().substring(10);
+        // login_id=login_id.replace(/\s/g, '');
+        // login_id = login_id.replace(/^[^,]+,/, '')
+            
+            var params=$location.hash();
+            console.log(params)
+           var value = params.substring(params.indexOf('=')+1, params.length); 
+           var key=params.substring(0,params.indexOf('='));
+           console.log(key)
+           console.log(value)
+           value= window.decodeURIComponent(window.atob(value)) 
+            console.log(value)
+       
+            
+         //登陆获取权限接口 
         $http({
                 method: 'POST',
                 url: urlService.getCommonUrl()+'person/station',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                data: 'login_id=admin'
+                data: key+'='+value
                 })
         .then(function(data){
+            if(Number(data.data.code)==0){
+                //数据表里面没有这个，请添加
+                $scope.taskStatus=data.data.msg
                console.log(data.data.msg[0].id)
-             console.log("获取权限成功");
+           }else{
+
+            console.log(data);
+        }
+               
 
         },function(error){
-            console.log("获取权限失败"+error);
+            console.log(error);
 
         })
-       
 
 
+        //获取登录用户信息接口
+        $http({
+                method: 'POST',
+                url: urlService.getCommonUrl()+'person/getPerson',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                data: key+'='+value
+                })
+        .then(function(data){
+            if(Number(data.data.code)==0){
+                //数据表里面没有这个，请添加
+                $scope.userInfo=data.data.msg;
+               console.log(data.data.msg.loginId)
+           }else{
 
+            console.log(data);
+        }
+               
 
+        },function(error){
+            console.log(error);
 
-    }]);
+        })
+
+           }]);
   
 
         // $.ajax({//登陆获取权限接口 2.用户名码验证
@@ -505,7 +551,48 @@
         //         console.log("获取权限失败"+data.msg);
         //     }
         // });
-    
+//     {
+//   "msg": [
+//     {
+//       "createTime": null,
+//       "createUserId": "",
+//       "id": "1",
+//       "isLock": 0,
+//       "lastEditTime": null,
+//       "lastEditUserId": "",
+//       "pageUrl": "",
+//       "sort": 1,
+//       "stationId": "",
+//       "upId": ""
+//     },
+//     {
+//       "createTime": null,
+//       "createUserId": "",
+//       "id": "2",
+//       "isLock": 0,
+//       "lastEditTime": null,
+//       "lastEditUserId": "",
+//       "pageUrl": "",
+//       "sort": 2,
+//       "stationId": "",
+//       "upId": ""
+//     },
+//     {
+//       "createTime": null,
+//       "createUserId": "",
+//       "id": "3",
+//       "isLock": 0,
+//       "lastEditTime": null,
+//       "lastEditUserId": "",
+//       "pageUrl": "",
+//       "sort": 1,
+//       "stationId": "",
+//       "upId": ""
+//     }
+//   ],
+//   "code": "0"
+// }
+
 </script>
 </body>
 </html>

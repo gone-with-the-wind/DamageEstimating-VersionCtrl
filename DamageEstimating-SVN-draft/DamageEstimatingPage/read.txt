@@ -1,0 +1,653 @@
+addCase.delegate_org.selectId  委托机构
+addCase.insurer.insurerName   承保机构
+addCase.reportNum  报案号
+addCase.owner  车主
+addCase.carNum 车牌号
+addCase.carBrand 车辆品牌
+addCase.contact  联系人
+addCase.contactPhone 联系电话
+addCase.accidentLocation   事故地点
+addCase.scene_type.selectId  事故类型
+addCase.scene_resp.selectId 事故责任
+addCase.reportTime 报案时间
+addCase.dangerTime 出险时间
+addCase.fastPay  快赔
+addCase.lossType.person   损失类型
+addCase.lossType.goods
+addCase.describe 事故描述
+addCase.focus重点关注
+
+
+
+
+info.setCaseId("FX1101110011");
+info.setDelegateType(1);
+info.setDelegateOrgId("abcdwertyyyyggffdfgrgrg");
+info.setInsurerId("134dwertyyyyggffdfgrgrg");
+info.setOwnerName("车主");
+info.setCarNumber("浙A000001");
+info.setCarBrand("奥迪A4");
+info.setReporterName("报案人");
+info.setReporterPhone("13378965412");
+info.setSceneLocation("智慧产业园");
+info.setSceneTypeId("874hfheufertyyyyggffdfgrgrg");
+info.setSceneRespId("9999999ertyyyyggffdfgrgrg");
+info.setReportTime(new Date());
+info.setSceneTime(new Date());
+info.setIsQuick(0);
+info.setIsHumanHurt(0);
+info.setIsMatDamage(1);
+info.setSceneDesc("事故描述");
+info.setImportDesc("重点关注");
+info.setCreateUserId("ffy8weu34423244");
+
+
+
+
+//addCase提交后回传数据
+{
+  "msg": {
+    "T_TARGET_BILL": {
+      "billId": "d1902e0032114527997ecb8db3ab61d2",
+      "billStateId": "",
+      "billType": "",
+      "caseId": "123333222333",
+      "createTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 13,
+        "minutes": 45,
+        "month": 7,
+        "nanos": 693000000,
+        "seconds": 38,
+        "time": 1503294338693,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "createUserId": "",
+      "engineNo": "",
+      "expectAmount": 0,
+      "isLock": 0,
+      "lastEditTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 13,
+        "minutes": 45,
+        "month": 7,
+        "nanos": 693000000,
+        "seconds": 38,
+        "time": 1503294338693,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "lastEditUserId": "",
+      "latitude": 0,
+      "longitude": 0,
+      "repairId": "",
+      "repairTypeId": "",
+      "surveyPopleId": "",
+      "targetBrand": "",
+      "targetCarNo": "",
+      "targetCredNo": "",
+      "targetCredTypeId": "",
+      "targetUserId": "",
+      "targetUserphone": "",
+      "vin": ""
+    },
+    "T_CASE_INFO": {
+      "carBrand": "",
+      "carNumber": "44",
+      "caseId": "123333222333",
+      "caseInnerId": "86de7721b5e1478d802b820f61726c29",
+      "caseStateId": "1",
+      "createTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 13,
+        "minutes": 45,
+        "month": 7,
+        "nanos": 693000000,
+        "seconds": 38,
+        "time": 1503294338693,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "createUserId": "ffy8weu34423244",
+      "delegateOrgId": "1",
+      "delegateType": 1,
+      "importDesc": "",
+      "insurerId": "",
+      "isHumanHurt": 0,
+      "isMatDamage": 0,
+      "isQuick": 0,
+      "isTrack": 0,
+      "lastEditTime": null,
+      "lastEditUserId": "ffy8weu34423244",
+      "ownerName": "44",
+      "reportTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 13,
+        "minutes": 45,
+        "month": 7,
+        "seconds": 0,
+        "time": 1503294300000,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "reporterName": "44",
+      "reporterPhone": "13333333333",
+      "sceneDesc": "22333",
+      "sceneLocation": "",
+      "sceneRespId": "",
+      "sceneTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 13,
+        "minutes": 45,
+        "month": 7,
+        "seconds": 0,
+        "time": 1503294300000,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "sceneTypeId": ""
+    },
+    "T_SURVEY_BILL": {
+      "billId": "dfdd10fd94254cde89e88feaf04b2058",
+      "billStateId": "",
+      "billType": "",
+      "caseId": "123333222333",
+      "createTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 13,
+        "minutes": 45,
+        "month": 7,
+        "nanos": 693000000,
+        "seconds": 38,
+        "time": 1503294338693,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "createUserId": "",
+      "credNo": "",
+      "credTypeId": "",
+      "engineNo": "",
+      "expectAmount": 0,
+      "isLock": 0,
+      "isQuick": 0,
+      "isRescue": 0,
+      "lastEditTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 13,
+        "minutes": 45,
+        "month": 7,
+        "nanos": 693000000,
+        "seconds": 38,
+        "time": 1503294338693,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "lastEditUserId": "",
+      "latitude": 0,
+      "longitude": 0,
+      "surveyPopleId": "",
+      "targetBrand": "",
+      "targetCarNo": "",
+      "targetUserName": "",
+      "targetUserPhone": "",
+      "thirdBrand": "",
+      "thirdCarNo": "",
+      "thirdUserName": "",
+      "thirdUserPhone": "",
+      "vin": ""
+    }
+  },
+  "code": "0"
+}
+
+
+//addCase多车事故
+{
+  "msg": {
+    "T_TARGET_BILL": {
+      "billId": "f4bd66cf890d4f408714fffe5d48a13a",
+      "billStateId": "",
+      "billType": "",
+      "caseId": "12111121121212",
+      "createTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 44,
+        "month": 7,
+        "nanos": 361000000,
+        "seconds": 24,
+        "time": 1503305064361,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "createUserId": "",
+      "engineNo": "",
+      "expectAmount": 0,
+      "isLock": 0,
+      "lastEditTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 44,
+        "month": 7,
+        "nanos": 361000000,
+        "seconds": 24,
+        "time": 1503305064361,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "lastEditUserId": "",
+      "latitude": 0,
+      "longitude": 0,
+      "repairId": "",
+      "repairTypeId": "",
+      "surveyPopleId": "",
+      "targetBrand": "",
+      "targetCarNo": "",
+      "targetCredNo": "",
+      "targetCredTypeId": "",
+      "targetUserId": "",
+      "targetUserphone": "",
+      "vin": ""
+    },
+    "T_CASE_INFO": {
+      "carBrand": "2222",
+      "carNumber": "1211",
+      "caseId": "12111121121212",
+      "caseInnerId": "9391a6597efe472c81df984590b5f532",
+      "caseStateId": "1",
+      "createTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 44,
+        "month": 7,
+        "nanos": 361000000,
+        "seconds": 24,
+        "time": 1503305064361,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "createUserId": "ffy8weu34423244",
+      "delegateOrgId": "1",
+      "delegateType": 1,
+      "importDesc": "111",
+      "insurerId": "",
+      "isHumanHurt": 0,
+      "isMatDamage": 0,
+      "isQuick": 0,
+      "isTrack": 0,
+      "lastEditTime": null,
+      "lastEditUserId": "ffy8weu34423244",
+      "ownerName": "2121",
+      "reportTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 43,
+        "month": 7,
+        "seconds": 0,
+        "time": 1503304980000,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "reporterName": "111",
+      "reporterPhone": "12222222222",
+      "sceneDesc": "1111",
+      "sceneLocation": "122",
+      "sceneRespId": "1",
+      "sceneTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 43,
+        "month": 7,
+        "seconds": 0,
+        "time": 1503304980000,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "sceneTypeId": "2"
+    },
+    "T_THIRD_BILL": {
+      "billId": "5fbcb029e6304da5939fbd7e7f8640a3",
+      "billStateId": "",
+      "billType": "",
+      "caseId": "12111121121212",
+      "createTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 44,
+        "month": 7,
+        "nanos": 361000000,
+        "seconds": 24,
+        "time": 1503305064361,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "createUserId": "",
+      "engineNo": "",
+      "expectAmount": 0,
+      "isLock": 0,
+      "lastEditTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 44,
+        "month": 7,
+        "nanos": 361000000,
+        "seconds": 24,
+        "time": 1503305064361,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "lastEditUserId": "",
+      "latitude": 0,
+      "longitude": 0,
+      "repairId": "",
+      "repairTypeId": "",
+      "surveyPopleId": "",
+      "thirdBrand": "",
+      "thirdCarNo": "",
+      "thirdCredNo": "",
+      "thirdCredTypeId": "",
+      "thirdUserName": "",
+      "thirdUserPhone": "",
+      "vin": ""
+    },
+    "T_SURVEY_BILL": {
+      "billId": "343123a1417b400998f853b82b06c4bb",
+      "billStateId": "",
+      "billType": "",
+      "caseId": "12111121121212",
+      "createTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 44,
+        "month": 7,
+        "nanos": 361000000,
+        "seconds": 24,
+        "time": 1503305064361,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "createUserId": "",
+      "credNo": "",
+      "credTypeId": "",
+      "engineNo": "",
+      "expectAmount": 0,
+      "isLock": 0,
+      "isQuick": 0,
+      "isRescue": 0,
+      "lastEditTime": {
+        "date": 21,
+        "day": 1,
+        "hours": 16,
+        "minutes": 44,
+        "month": 7,
+        "nanos": 361000000,
+        "seconds": 24,
+        "time": 1503305064361,
+        "timezoneOffset": -480,
+        "year": 117
+      },
+      "lastEditUserId": "",
+      "latitude": 0,
+      "longitude": 0,
+      "surveyPopleId": "",
+      "targetBrand": "",
+      "targetCarNo": "",
+      "targetUserName": "",
+      "targetUserPhone": "",
+      "thirdBrand": "",
+      "thirdCarNo": "",
+      "thirdUserName": "",
+      "thirdUserPhone": "",
+      "vin": ""
+    }
+  },
+  "code": "0"
+}
+
+
+
+
+//委托机构承保机构
+{
+  "msg": {
+    "scene_resp": [
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 2,
+          "month": 7,
+          "seconds": 41,
+          "time": 1502762561000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 2,
+          "month": 7,
+          "seconds": 44,
+          "time": 1502762564000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "respDesc": "测试责任类型A",
+        "respId": "1",
+        "sort": 1
+      },
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 3,
+          "month": 7,
+          "seconds": 4,
+          "time": 1502762584000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 3,
+          "month": 7,
+          "seconds": 11,
+          "time": 1502762591000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "respDesc": "测试责任类型B",
+        "respId": "2",
+        "sort": 1
+      }
+    ],
+    "delegate_org": [
+      {
+        "contackPhone": "13333333333",
+        "contackUser": "test",
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 0,
+          "month": 7,
+          "seconds": 20,
+          "time": 1502762420000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "delegateOrgId": "1",
+        "delegateOrgName": "测试委托机构A",
+        "isLock": 0,
+        "isSign": 1,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 0,
+          "month": 7,
+          "seconds": 24,
+          "time": 1502762424000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "orgAddress": "测试地址",
+        "sort": 1
+      }
+    ],
+    "insurer": [
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 58,
+          "month": 7,
+          "seconds": 33,
+          "time": 1502762313000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "insurerId": "1",
+        "insurerName": "测试机构A",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 58,
+          "month": 7,
+          "seconds": 39,
+          "time": 1502762319000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1
+      },
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 58,
+          "month": 7,
+          "seconds": 55,
+          "time": 1502762335000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "insurerId": "2",
+        "insurerName": "测试机构B",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 9,
+          "minutes": 59,
+          "month": 7,
+          "seconds": 1,
+          "time": 1502762341000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1
+      }
+    ],
+    "scene_type": [
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 15,
+          "time": 1502762655000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 18,
+          "time": 1502762658000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1,
+        "typeDesc": "单车事故",
+        "typeId": "1"
+      },
+      {
+        "createTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 30,
+          "time": 1502762670000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "createUserId": "1",
+        "isLock": 0,
+        "lastEditTime": {
+          "date": 15,
+          "day": 2,
+          "hours": 10,
+          "minutes": 4,
+          "month": 7,
+          "seconds": 36,
+          "time": 1502762676000,
+          "timezoneOffset": -480,
+          "year": 117
+        },
+        "lastEditUserId": "1",
+        "sort": 1,
+        "typeDesc": "多车事故",
+        "typeId": "2"
+      }
+    ]
+  },
+  "code": 0
+}
