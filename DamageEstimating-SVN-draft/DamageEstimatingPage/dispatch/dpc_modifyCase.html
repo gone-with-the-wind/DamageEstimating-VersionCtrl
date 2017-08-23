@@ -73,7 +73,7 @@
     <div class="container-fluid">
         <!--案件信息-->
         <div class="dpc_box1 mt15">
-            <form class="form-horizontal">
+            <form class="form-horizontal" role="form" name="myForm" ng-submit="submitForm()" novalidate>
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
                             <div class="form-group">
@@ -325,7 +325,7 @@
                             </div>
                         </div>
                     <div class="col-xs-12 text-center mt15">
-                        <a class="btn btn-primary mr10">保存</a>
+                        <button class="btn btn-primary mr10" type="submit"> 保存</button>
                         <a class="btn btn-primary" data-toggle="modal" data-target="#note">备注</a>
                     </div>
                 </div>
@@ -361,8 +361,8 @@
                         <td>{{task.carBrand}}</td>
                         <td>{{task.delegate_orgName}}</td>
                         <td>{{task.insurerName}}</td>
-                        <td ng-if="!task.isLock"><button class="btn btn-default btn-sm"  ng-click="!task.isLock">锁定{{task.isLock}}</button></td>
-                        <td ng-if="task.isLock"><button class="btn btn-default btn-sm"  ng-click="!task.isLock">恢复{{task.isLock}}</button></td>
+                        <td ng-if="!task.isLock"><button class="btn btn-default btn-sm"  ng-click="task.isLock=true">锁定</button></td>
+                        <td ng-if="task.isLock"><button class="btn btn-default btn-sm"  ng-click="task.isLock=false">恢复</button></td>
                     </tr>
                     <!-- <tr>
                         <td><input type="checkbox" ng-checked="selectAll" ng-model="task.state"></td>
@@ -768,72 +768,83 @@
         // 重点关注
         $scope.addCase.focus =data.msg.T_CASE_INFO.importDesc
 
-        $scope.tasks=[{},{},{}];
-        // 任务id      
-        $scope.tasks[1].taskId=data.msg.T_TARGET_BILL.billId
-        // 选择状态    
-        $scope.tasks[1].taskstate=true
-        // 任务类型    
-        $scope.tasks[1].taskType=data.msg.T_TARGET_BILL.billType
-        // 派工状态    
-        $scope.tasks[1].billState=data.msg.T_TARGET_BILL.billStateId
-        // 车牌号      
-        $scope.tasks[1].carNum=data.msg.T_TARGET_BILL.targetCarNo
-        // 品牌型号    
-        $scope.tasks[1].carBrand=data.msg.T_TARGET_BILL.targetBrand
-        // 委托机构    
-        $scope.tasks[1].delegate_orgName='2'
-        // $scope.addCase.delegate_org[data.msg.T_CASE_INFO.delegateOrgId]
-        // 承保机构  
-        $scope.tasks[1].insurerName='2'
-        // $scope.addCase.insurer[data.msg.T_CASE_INFO.insurerId]
-        // 操作      
-        $scope.tasks[1].isLock=Boolean(data.msg.T_TARGET_BILL.isLock)
+        $scope.tasks=[];
 
 
+        taskObj={};
         // 任务id     
-        $scope.tasks[0].taskId=data.msg.T_SURVEY_BILL.billId
+        taskObj.taskId=data.msg.T_SURVEY_BILL.billId
         // 选择状态    
-        $scope.tasks[0].taskstate=true
+        taskObj.taskstate=true
         // 任务类型    
-        $scope.tasks[0].taskType=data.msg.T_SURVEY_BILL.billType
+        taskObj.taskType=data.msg.T_SURVEY_BILL.billType
         // 派工状态    
-        $scope.tasks[0].billState=data.msg.T_SURVEY_BILL.billStateId
+        taskObj.billState=data.msg.T_SURVEY_BILL.billStateId
         // 车牌号      
-        $scope.tasks[0].carNum=data.msg.T_SURVEY_BILL.targetCarNo
+        taskObj.carNum=data.msg.T_SURVEY_BILL.targetCarNo
         // 品牌型号    
-        $scope.tasks[0].carBrand=data.msg.T_SURVEY_BILL.targetBrand
+        taskObj.carBrand=data.msg.T_SURVEY_BILL.targetBrand
         // 委托机构    
-        $scope.tasks[0].delegate_orgName='1'
+        taskObj.delegate_orgName='1'
         // $scope.addCase.delegate_org[data.msg.T_SURVEY_BILL.delegateOrgId]
         // 承保机构  
-        $scope.tasks[0].insurerName='1'
+        taskObj.insurerName='1'
         // $scope.addCase.insurer[data.msg.T_SURVEY_BILL.insurerId]
         // 操作      
-        $scope.tasks[0].isLock=Boolean(data.msg.T_SURVEY_BILL.isLock)
+        taskObj.isLock=Boolean(data.msg.T_SURVEY_BILL.isLock)
+        $scope.tasks.push(taskObj)
+
+
+        var taskObj={};
+        // 任务id      
+        taskObj.taskId=data.msg.T_TARGET_BILL.billId
+        // 选择状态    
+        taskObj.taskstate=true
+        // 任务类型    
+        taskObj.taskType=data.msg.T_TARGET_BILL.billType
+        // 派工状态    
+        taskObj.billState=data.msg.T_TARGET_BILL.billStateId
+        // 车牌号      
+        taskObj.carNum=data.msg.T_TARGET_BILL.targetCarNo
+        // 品牌型号    
+        taskObj.carBrand=data.msg.T_TARGET_BILL.targetBrand
+        // 委托机构    
+        taskObj.delegate_orgName='2'
+        // $scope.addCase.delegate_org[data.msg.T_CASE_INFO.delegateOrgId]
+        // 承保机构  
+        taskObj.insurerName='2'
+        // $scope.addCase.insurer[data.msg.T_CASE_INFO.insurerId]
+        // 操作      
+        taskObj.isLock=Boolean(data.msg.T_TARGET_BILL.isLock)
+        $scope.tasks.push(taskObj)
+
 
 
         if(data.msg.T_THIRD_BILL){
+
+        taskObj={};
         // 任务id      
-        $scope.tasks[2].taskId=data.msg.T_THIRD_BILL.billId
+        taskObj.taskId=data.msg.T_THIRD_BILL.billId
         // 选择状态    
-        $scope.tasks[2].taskstate=true
+        taskObj.taskstate=true
         // 任务类型    
-        $scope.tasks[2].taskType=data.msg.T_THIRD_BILL.billType
+        taskObj.taskType=data.msg.T_THIRD_BILL.billType
         // 派工状态    
-        $scope.tasks[2].billState=data.msg.T_THIRD_BILL.billStateId
+        taskObj.billState=data.msg.T_THIRD_BILL.billStateId
         // 车牌号      
-        $scope.tasks[2].carNum=data.msg.T_THIRD_BILL.targetCarNo
+        taskObj.carNum=data.msg.T_THIRD_BILL.targetCarNo
         // 品牌型号    
-        $scope.tasks[2].carBrand=data.msg.T_THIRD_BILL.targetBrand
+        taskObj.carBrand=data.msg.T_THIRD_BILL.targetBrand
         // 委托机构    
-        $scope.tasks[2].delegate_orgName='3'
+        taskObj.delegate_orgName='3'
         // $scope.addCase.delegate_org[data.msg.T_THIRD_BILL.delegateOrgId]
         // 承保机构  
-        $scope.tasks[2].insurerName='3'
+        taskObj.insurerName='3'
         // $scope.addCase.insurer[data.msg.T_THIRD_BILL.insurerId]
         // 操作      
-        $scope.tasks[2].isLock=Boolean(data.msg.T_THIRD_BILL.isLock) 
+        taskObj.isLock=Boolean(data.msg.T_THIRD_BILL.isLock) 
+
+        $scope.tasks.push(taskObj)
         }
         console.log($scope.tasks)
 
@@ -866,6 +877,54 @@
                     
                 })
             }
+
+        $scope.submitForm = function() {
+                    // console.log(angular.toJson($scope.addCase,0))
+                     var postData={
+                   'caseId':$scope.addCase.reportNum,
+                   'caseInnerId':data.msg.T_CASE_INFO.caseInnerId,
+                   'delegateType':1,
+                   'delegateOrgId':$scope.addCase.delegate_org.selectId,
+                   'insurerId':$scope.addCase.insurer.selectId,
+                   'ownerName':$scope.addCase.owner,
+                   'carNumber':$scope.addCase.carNum,
+                   'carBrand':$scope.addCase.carBrand,
+                   'reporterName':$scope.addCase.contact,
+                   'reporterPhone':$scope.addCase.contactPhone,
+                   'sceneLocation':$scope.addCase.accidentLocation,
+                   'sceneTypeId':$scope.addCase.scene_type.selectId,
+                   'sceneRespId':$scope.addCase.scene_resp.selectId,
+                   'reportTime':$scope.addCase.reportTime,
+                   'sceneTime':$scope.addCase.dangerTime,
+                   'isQuick':$scope.addCase.fastPay,
+                   'isHumanHurt':$scope.addCase.lossType.person,  
+                   'isMatDamage':$scope.addCase.lossType.goods,
+                   'sceneDesc':$scope.addCase.describe,
+                   'importDesc':$scope.addCase.focus,
+                   'createUserId':"ffy8weu34423244"
+                };
+                console.log(postData)
+                 $http({
+                    method: 'POST',
+                    url: urlService.getCommonUrl()+'case/edit',
+                    headers: {'Content-Type': 'application/json','accesskey':'acaaaa'},
+                    data:postData
+
+                    // transformRequest: function(obj) {
+                    //     var str = [];
+                    //     for(var p in obj)
+                    //     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                    //     return str.join("&");
+
+                    //     }
+                    }).then(function(data1) {
+                        console.log(data1)
+                        
+                    },function(error){
+                        alert("2222")
+                        console.log(error)
+                    })
+                }
         
        // $http({
        //          method: 'POST',
