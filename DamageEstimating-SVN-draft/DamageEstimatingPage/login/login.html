@@ -108,9 +108,9 @@
 
                 url: urlService.getCommonUrl()+'person/login',
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                data: 'login_id='+$scope.userdata.username+'&pwd='+$scope.userdata.password
+                data: 'login_id='+$scope.userdata.username+'&pwd='+$scope.userdata.password+'&login_mode=1'
                 }).then(function(data) {
-                    
+                    console.log(data)
                     
                     // var obj=(new Function("","return "+data))(); 
                     
@@ -118,6 +118,9 @@
                     if(Number(data.data.code)===0){
                         console.log(data.data.msg);
                         var login_id=$scope.userdata.username;
+
+                        
+                        sessionStorage.setItem("loginType", "login_id="+login_id) ;
                         // window.encodeURIComponent('login_id='+login_id)
 
                         var encodeData = window.btoa(window.encodeURIComponent(login_id));

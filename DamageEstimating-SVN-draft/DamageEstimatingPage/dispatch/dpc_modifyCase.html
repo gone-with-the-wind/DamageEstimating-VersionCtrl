@@ -8,6 +8,17 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/datetimepicker.css">
     <link href="../css/main.css" rel="stylesheet">
+    <style>
+.popover{background:#C00;color:#FFF;}
+.popover .popover-content{padding:1px 5px;}
+.popover.bottom>.arrow::after{border-bottom-color:#C00;}
+.has-error input,
+.has-error textarea,
+.has-error select{background-color:#F2DEDE;}
+.has-success input,
+.has-success textarea,
+.has-success select{background-color:#DFF0D8}
+    </style>
 </head>
 <body ng-app="app" ng-controller="ctrl">
 <div class="m_header">
@@ -96,7 +107,8 @@
                                 <div class="col-xs-7">
                                     <select class="form-control"
                                         ng-model="addCase.delegate_org.selectId"
-                                        ng-options="value.delegateOrgId as value.delegateOrgName for value in addCase.delegate_org" required>
+                                        ng-options="value.delegateOrgId as value.delegateOrgName for value in addCase.delegate_org" required  popover popover-show="myForm.delegate_org.$error.required"   
+                           popover-options='{"content": "委托机构不能为空", "placement": "bottom", "trigger": "manual"}' name="delegate_org">
                                         <option value="">--</option>
                                     </select>
                                     <!-- <select class="form-control" id="input1">
@@ -117,7 +129,7 @@
 
                                     <select class="form-control"
                                         ng-model="addCase.insurer.selectId"
-                                        ng-options="value.insurerId as value.insurerName for value in addCase.insurer" >
+                                        ng-options="value.insurerId as value.insurerName for value in addCase.insurer"  >
                                         <option value="">--</option>
                                     </select>
                                     <!-- <input type="text" class="form-control" id="input2" placeholder="请输入承保机构" ng-model="addCase.insurer.insurerName"> -->
@@ -128,7 +140,8 @@
                             <div class="form-group">
                                 <label for="input3" class="col-xs-5 control-label"><span class="text-red">*</span>报案号</label>
                                 <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="input3" placeholder="请输入报案号" required ng-model="addCase.reportNum">
+                                    <input type="text" class="form-control" id="input3" placeholder="请输入报案号" required ng-model="addCase.reportNum" popover popover-show="myForm.reportNum.$error.required"   
+                           popover-options='{"content": "报案号不能为空", "placement": "bottom", "trigger": "manual"}' name="reportNum">
                                 </div>
                             </div>
                         </div>
@@ -136,7 +149,8 @@
                             <div class="form-group">
                                 <label for="input4" class="col-xs-5 control-label"><span class="text-red">*</span>车主</label>
                                 <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="input4" placeholder="请输入车主" required ng-model='addCase.owner'>
+                                    <input type="text" class="form-control" id="input4" placeholder="请输入车主" required ng-model='addCase.owner' popover popover-show="myForm.owner.$error.required"   
+                           popover-options='{"content": "车主不能为空", "placement": "bottom", "trigger": "manual"}' name="owner">
                                 </div>
                             </div>
                         </div>
@@ -144,7 +158,8 @@
                             <div class="form-group">
                                 <label for="input5" class="col-xs-5 control-label"><span class="text-red">*</span>车牌号</label>
                                 <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="input5" placeholder="请输入车牌号" required ng-model="addCase.carNum">
+                                    <input type="text" class="form-control" id="input5" placeholder="请输入车牌号" required ng-model="addCase.carNum" popover popover-show="myForm.carNum.$error.required"   
+                           popover-options='{"content": "车主不能为空", "placement": "bottom", "trigger": "manual"}' name="carNum">
                                 </div>
                             </div>
                         </div>
@@ -160,7 +175,8 @@
                             <div class="form-group">
                                 <label for="input7" class="col-xs-5 control-label"><span class="text-red">*</span>联系人</label>
                                 <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="input7" placeholder="请输入联系人" required ng-model="addCase.contact">
+                                    <input type="text" class="form-control" id="input7" placeholder="请输入联系人" required ng-model="addCase.contact" popover popover-show="myForm.contact.$error.required"   
+                           popover-options='{"content": "车主不能为空", "placement": "bottom", "trigger": "manual"}' name="contact">
                                 </div>
                             </div>
                         </div>
@@ -168,7 +184,8 @@
                             <div class="form-group has-feedback">
                                 <label for="input8" class="col-xs-5 control-label"><span class="text-red">*</span>联系电话</label>
                                 <div class="col-xs-7">
-                                    <input type="text" class="form-control" id="input8" placeholder="请输入联系电话" required ng-model="addCase.contactPhone" ng-pattern="/^1\d{10}$/" name="contactPhone">
+                                    <input type="text" class="form-control" id="input8" placeholder="请输入联系电话" required ng-model="addCase.contactPhone" ng-pattern="/^1\d{10}$/" name="contactPhone" popover popover-show="myForm.contactPhone.$error.required"   
+                           popover-options='{"content": "联系电话不能为空", "placement": "bottom", "trigger": "manual"}' name="contactPhone">
                                     <span class="glyphicon glyphicon-ok form-control-feedback"
                               ng-show="myForm.contactPhone.$dirty && myForm.contactPhone.$valid"></span>
 
@@ -312,7 +329,8 @@
                             <div class="form-group">
                                 <label for="input14" class="col-xs-5 control-label"><span class="text-red">*</span>事故描述</label>
                                 <div class="col-xs-7">
-                                    <textarea class="form-control" id="input14" rows="3" required ng-model="addCase.describe"></textarea>
+                                    <textarea class="form-control" id="input14" rows="3" required ng-model="addCase.describe" popover popover-show="myForm.describe.$error.required"   
+                           popover-options='{"content": "事故描述不能为空", "placement": "bottom", "trigger": "manual"}' name="describe"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -325,7 +343,7 @@
                             </div>
                         </div>
                     <div class="col-xs-12 text-center mt15">
-                        <button class="btn btn-primary mr10" type="submit"> 保存</button>
+                        <button class="btn btn-primary mr10" type="submit" id="submit"> 保存</button>
                         <a class="btn btn-primary" data-toggle="modal" data-target="#note">备注</a>
                     </div>
                 </div>
@@ -879,6 +897,12 @@
             }
 
         $scope.submitForm = function() {
+            if($scope.myForm.$invalid){
+                console.log($('#submit'))
+                $('#submit').popover({ "placement": "bottom", "trigger": "manual" ,"content":"还有必填项未完成或者所填格式错误"});  
+                $('#submit').popover('show');  
+                return;
+            }
                     // console.log(angular.toJson($scope.addCase,0))
                      var postData={
                    'caseId':$scope.addCase.reportNum,

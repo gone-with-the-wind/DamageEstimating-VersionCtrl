@@ -39,7 +39,7 @@ ol, ul {list-style: none;}
 .python{position:fixed;top:60px;left:240px;right:0;height:34px;border-bottom:1px solid #eee;line-height:34px;padding-left:20px;background-color:#fff;}
 .m_container{position:fixed;top:94px;right:0;bottom:0;left:240px;overflow-y:auto;}
 .dpc_btnB{padding:15px 0;}
-.dpc_box1{border-top:1px solid #8091d9;padding:20px;background-color:#fff;}
+.dpc_box1{border-top:1px solid #8091d9;padding:20px;background-color:#fff;height:100%}
 .dpc_box2{border-top:1px solid #d5daf2;padding:20px;background-color:#fff;}
 /* 1. login.html
 -------------------------------*/

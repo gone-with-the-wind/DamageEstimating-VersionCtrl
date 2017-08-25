@@ -10,7 +10,7 @@
 </head>
 <body ng-app="app" ng-controller="ctrl">
 <div class="m_header">
-    <a class="m_headerLeft" href="login.html">
+    <a class="m_headerLeft" href="../personal/personal_home.html">
         <!--<img class="m_userImg" src="">-->
         <i class="glyphicon glyphicon-user"></i><span class="ml10">用户名</span>
     </a>
@@ -435,35 +435,35 @@
         // login_id = login_id.replace(/^[^,]+,/, '')
             
             var params=$location.hash();
-            console.log(params)
+            //console.log(params)
            var value = params.substring(params.indexOf('=')+1, params.length); 
            var key=params.substring(0,params.indexOf('='));
-           console.log(key)
-           console.log(value)
+           //console.log(key)
+           //console.log(value)
            value= window.decodeURIComponent(window.atob(value)) 
-            console.log(value)
+            //console.log(value)
        
             
          //登陆获取权限接口 
         $http({
                 method: 'POST',
                 url: urlService.getCommonUrl()+'person/station',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded','accesskey':'acaaaa'},
                 data: key+'='+value
                 })
         .then(function(data){
             if(Number(data.data.code)==0){
                 //数据表里面没有这个，请添加
                 $scope.taskStatus=data.data.msg
-               console.log(data.data.msg[0].id)
+               //console.log(data.data.msg[0].id)
            }else{
 
-            console.log(data);
+            //console.log(data);
         }
                
 
         },function(error){
-            console.log(error);
+            //console.log(error);
 
         })
 
@@ -472,26 +472,32 @@
         $http({
                 method: 'POST',
                 url: urlService.getCommonUrl()+'person/getPerson',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded','accesskey':'acaaaa'},
                 data: key+'='+value
                 })
         .then(function(data){
+            console.log(data)
             if(Number(data.data.code)==0){
                 //数据表里面没有这个，请添加
                 $scope.userInfo=data.data.msg;
-               console.log(data.data.msg.loginId)
+                
            }else{
 
-            console.log(data);
+            //console.log(data);
         }
                
 
         },function(error){
-            console.log(error);
+            //console.log(error);
 
         })
 
            }]);
+
+
+
+
+
   
 
         // $.ajax({//登陆获取权限接口 2.用户名码验证
@@ -502,10 +508,10 @@
         //     processData: false,
         //     success:function(data){
         //         var d=eval("("+data+")");
-        //         console.log("获取权限成功"+d.msg);
+        //         //console.log("获取权限成功"+d.msg);
         //     },
         //     error:function(data){
-        //         console.log("获取权限失败"+data.msg);
+        //         //console.log("获取权限失败"+data.msg);
         //     }
         // });
 
@@ -518,11 +524,11 @@
         //     processData: false,
         //     success:function(data){
         //         var obj=eval("("+data+")");
-        //         console.log("获取权限成功"+obj.msg[0].id);
+        //         //console.log("获取权限成功"+obj.msg[0].id);
                 
         //     },
         //     error:function(data){
-        //         console.log("获取权限失败"+data.msg);
+        //         //console.log("获取权限失败"+data.msg);
         //     }
         // });
 
@@ -535,10 +541,10 @@
         //     processData: false,
         //     success:function(data){
         //         var d=eval("("+data+")");
-        //         console.log("获取权限成功"+d.msg);
+        //         //console.log("获取权限成功"+d.msg);
         //     },
         //     error:function(data){
-        //         console.log("获取权限失败"+data.msg);
+        //         //console.log("获取权限失败"+data.msg);
         //     }
         // });
 
@@ -550,10 +556,10 @@
         //     processData: false,
         //     success:function(data){
         //         var d=eval("("+data+")");
-        //         console.log("获取权限成功"+d.msg);
+        //         //console.log("获取权限成功"+d.msg);
         //     },
         //     error:function(data){
-        //         console.log("获取权限失败"+data.msg);
+        //         //console.log("获取权限失败"+data.msg);
         //     }
         // });
 //     {
