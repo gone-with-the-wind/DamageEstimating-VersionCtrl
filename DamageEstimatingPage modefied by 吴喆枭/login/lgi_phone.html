@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录</title>
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link href="../css/main.css" type="text/css" rel="stylesheet">
+    <style>
+        .error{
+            color:red;
+            
+        }
+
+    </style>
+    
+
+    
+</head>
+<body  ng-app="app" ng-controller="ctrl">
+<div class="container">
+    <div class="login_box">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title text-center">手机验证登录</h3>
+            </div>
+            <div class="panel-body">
+                <form name="myForm" ng-submit="submitForm()">
+                <div class="form-group">
+                <div class="input-group mb20 mt10">  
+                    <span class="input-group-addon" id="username"><i class="glyphicon glyphicon-phone-alt"></i></span>
+                    <input type="text" class="form-control " name="telephone" id="telephone" placeholder="手机号" aria-describedby="username" ng-model="telephone" ng-pattern="/^1\d{10}$/" required/>
+                   
+                </div>
+                 <div class="error" ng-if="myForm.telephone.$error.required&&myForm.telephone.$touched">手机号不能为空</div>
+                 <div class="error" ng-if="myForm.telephone.$error.pattern&&myForm.telephone.$touched">手机号格式不对</div>
+                 </div>
+                 <div class="form-group">
+                <div class="input-group mb20">
+                    <span class="input-group-addon" id="password"><i class="glyphicon glyphicon-pencil"></i></span>
+                    <input type="text" id="te" name="t"  class="form-control" placeholder="验证码" aria-describedby="password" ng-model="code" required>
+                    
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="get_code">获取验证码</button>
+                        <button class="btn btn btn-default" style="display: none" type="button" id="send_code2" >60s后重新发送</button>
+
+                    </span>
+
+                </div>
+                <div class="error" ng-if="myForm.t.$error.required&&myForm.t.$touched">验证码不能为空</div>
+                </div>
+                <div class="error"></div>
+                去<a href="login.html">密码登录</a>
+                <button type="submit" class="btn btn-primary Lbtn pull-right" ng-disabled="myForm.$invalid">登录</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/angular.min.js"></script>
+<script src="../js/service.js"></script>
+
+<script>
+    var app = angular.module('app',['MyService']);
+    app.controller("ctrl",["$scope","$http","$window","urlService",function($scope,$http,$window,urlService){
+         $window.urldata=urlService.getCommonUrl();
+     }])
+    $(function () {
+        var  name=$(".form-control").val();
+        $(".get_code").click(function(){
+            $.ajax({
+                type: 'POST',
+                url:urldata+'/sms/login',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                console.log(data.msg);
+                },
+                error:function(data){
+                    console.log(data.msg);
+                }
+            });
+        })
+
+        $(".Lbtn").click(function(){
+
+            var code = $("#test").val();
+            var tel=$("#tel").val();
+            
+            
+            $.ajax({
+                type: 'POST',
+                url:urldata+'/sms/login' ,
+                data: 'phone='+tel+'&identify_code='+code,
+                contentType: 'application/x-www-form-urlencoded',
+                processData: false,
+                success:function(data){
+                    console.log(data)
+                    var obj = eval('(' + data + ')'); 
+                    if(Number(obj.code)!=0){
+                        $(".error").text(obj.msg);
+                        $(".error").show();
+                        
+                    } 
+                        // var str = data.msg;
+                        // sid = data.code;
+                        // localStorage.setItem("key", sid);
+                        // if(str == "短信发送成功"){
+                        //    console.log(str)
+                        // }
+                },
+                error:function(data){
+                    console.log(data.msg);
+                }
+            });
+        })
+        //倒计时
+        $("#get_code").click(function(){
+            var num = 60;
+            $(this).css("display","none");
+            $("#send_code2").css("display","block");
+            timer = setInterval(function(){
+                num = --num;
+                var str = num+"s后重新发送"
+                $("#send_code2").text(str);
+                if(num < 1){
+                    $("#get_code").css("display","block");
+                    $("#send_code2").css("display","none");
+                    clearInterval(timer);
+                }
+
+            },1000)
+        })
+    })
+
+</script>
+
+</body>
+</html>
